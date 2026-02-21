@@ -1,4 +1,4 @@
-# Explicit Nixpacks config for Railway monorepo build
+# Explicit Nixpacks config - use npm install (npm ci requires synced lock file)
 [phases.setup]
 nixPkgs = ["nodejs_18"]
 
