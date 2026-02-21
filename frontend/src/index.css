@@ -123,6 +123,53 @@ body {
   }
 }
 
+/* ── Mobile: OH logo spacing (max-width: 768px) ───────────────────────── */
+@media (max-width: 768px) {
+  nav a[href="#home"].font-heading {
+    margin-left: 12px !important;
+    padding-left: 6px !important;
+  }
+}
+
+/* ── Mobile Chat: keyboard-safe layout (max-width: 768px) ─────────────── */
+@media (max-width: 768px) {
+  .chat-panel {
+    height: 100vh; /* fallback */
+    height: 100dvh !important;
+    max-height: 100dvh;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .chat-messages {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    padding-bottom: 100px !important;
+    padding-top: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .chat-row {
+    margin-bottom: 1rem !important;
+  }
+  .chat-row:last-of-type {
+    margin-bottom: 0 !important;
+  }
+  .chat-input-area {
+    position: sticky !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    background: rgba(26, 26, 26, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(0, 255, 204, 0.12) !important;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom)) !important;
+  }
+  .chat-bubble {
+    margin-bottom: 0.25em;
+  }
+}
+
 /* Hero: "Open to new opportunities" badge - spacing below profile picture */
 .hero-opportunities-badge {
   margin-top: 1rem;

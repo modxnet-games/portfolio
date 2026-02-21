@@ -194,7 +194,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="fixed z-50 inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[360px] sm:h-[500px] sm:rounded-2xl flex flex-col overflow-hidden"
+            className="chat-panel fixed z-50 inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[360px] sm:h-[500px] sm:rounded-2xl flex flex-col overflow-hidden"
             style={{
               background: 'rgba(26, 26, 26, 0.9)',
               backdropFilter: 'blur(24px)',
@@ -332,7 +332,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Input */}
-            <div className="px-4 py-3 border-t border-border/50 flex-shrink-0" style={{ background: 'rgba(26, 26, 26, 0.7)' }}>
+            <div className="chat-input-area px-4 py-3 border-t border-border/50 flex-shrink-0" style={{ background: 'rgba(26, 26, 26, 0.7)' }}>
               {limited ? (
                 <a
                   href={WHATSAPP_URL}
