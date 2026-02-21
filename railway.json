@@ -5,7 +5,7 @@
     "buildCommand": "npm run build",
     "nixpacksPlan": {
       "phases": {
-        "setup": { "nixPkgs": ["nodejs_18"] },
+        "setup": { "nixPkgs": ["nodejs_20"] },
         "install": { "cmds": ["npm install"] }
       }
     }
