@@ -133,19 +133,22 @@ body {
 
 /* ── Mobile Chat: keyboard-safe layout (max-width: 768px) ─────────────── */
 @media (max-width: 768px) {
-  .chat-panel {
-    height: 100vh; /* fallback */
+  .chat-panel.chat-container {
     height: 100dvh !important;
-    max-height: 100dvh;
+    max-height: 100dvh !important;
+    min-height: 0 !important;
     display: flex !important;
     flex-direction: column !important;
+  }
+  .chat-header {
+    flex-shrink: 0 !important;
   }
   .chat-messages {
     flex: 1 1 0 !important;
     min-height: 0 !important;
     overflow-y: auto !important;
     overflow-x: hidden;
-    padding-bottom: 100px !important;
+    padding-bottom: 12px !important;
     padding-top: 0.5rem;
     -webkit-overflow-scrolling: touch;
   }
@@ -155,15 +158,28 @@ body {
   .chat-row:last-of-type {
     margin-bottom: 0 !important;
   }
-  .chat-input-area {
+  .chat-input-area.chat-input {
     position: sticky !important;
     bottom: 0 !important;
     width: 100% !important;
+    flex-shrink: 0 !important;
+    padding: 10px 16px !important;
+    padding-bottom: max(10px, env(safe-area-inset-bottom)) !important;
     background: rgba(26, 26, 26, 0.92) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     border-top: 1px solid rgba(0, 255, 204, 0.12) !important;
-    padding-bottom: max(0.75rem, env(safe-area-inset-bottom)) !important;
+  }
+  .chat-input-area.chat-input .flex.items-center.gap-2 {
+    gap: 0.5rem !important;
+  }
+  .chat-input-area.chat-input input {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  .chat-input-area.chat-input p.text-\[9px\] {
+    margin-top: 0.5rem !important;
+    font-size: 8px !important;
   }
   .chat-bubble {
     margin-bottom: 0.25em;
