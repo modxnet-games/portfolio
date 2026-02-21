@@ -56,7 +56,7 @@ export default function Navbar() {
         {/* 3-column grid: Logo | Centered Links | CTA */}
         <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] items-center h-[72px]">
           {/* Left: Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center ml-4 md:ml-6">
             <motion.a
               href="#home"
               onClick={(e) => { e.preventDefault(); handleClick('#home'); }}
@@ -136,7 +136,7 @@ export default function Navbar() {
           <motion.a
             href="#home"
             onClick={(e) => { e.preventDefault(); handleClick('#home'); }}
-            className="font-heading text-xl font-bold tracking-tight"
+            className="font-heading text-xl font-bold tracking-tight ml-3"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >

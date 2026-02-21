@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Mail, ArrowRight } from 'lucide-react';
 import { InstagramIcon, FacebookIcon, WhatsAppIcon } from '../components/SocialIcons';
@@ -13,6 +14,7 @@ const socialLinks = [
 const trustedBy = ['React', 'Node.js', 'TypeScript', 'Tailwind', 'AI APIs'];
 
 export default function Hero() {
+  const [imgError, setImgError] = useState(false);
   return (
     <section
       id="home"
@@ -76,8 +78,12 @@ export default function Hero() {
               <div className="absolute -inset-5 rounded-full border border-dashed border-accent/10 animate-[spin_40s_linear_infinite_reverse]" />
               {/* Profile pic + 5+ Years + Full Stack in one wrapper - keeps badges fixed to image */}
               <div className="hero-profile-wrapper relative w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-[340px] xl:h-[340px] flex-shrink-0">
-                <div className="absolute inset-0 rounded-full overflow-hidden border border-border-light/20 shadow-[0_0_50px_rgba(0,255,204,0.15)]">
-                  <img src="/profile_pic.png" alt="Oussama Hitte" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 rounded-full overflow-hidden border border-border-light/20 shadow-[0_0_50px_rgba(0,255,204,0.15)] bg-dark-lighter flex items-center justify-center">
+                  {imgError ? (
+                    <span className="font-heading text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary via-primary-light to-accent bg-clip-text text-transparent">OH</span>
+                  ) : (
+                    <img src="/profile_pic.png" alt="Oussama Hitte" className="w-full h-full object-cover" onError={() => setImgError(true)} />
+                  )}
                 </div>
                 {/* Full Stack & 5+ Years - positioned relative to image wrapper only */}
                 <motion.div
