@@ -1,0 +1,20 @@
+{
+  "name": "oussama-hitte-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "install:all": "cd frontend && npm install && cd ../backend && npm install",
+    "postinstall": "npm run install:all",
+    "build": "cd frontend && npm run build && node ../scripts/copy-build.js",
+    "start": "cd backend && node server.js",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && node --watch server.js",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

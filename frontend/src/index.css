@@ -1,0 +1,660 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00ffcc;
+  --color-primary-light: #33ffd6;
+  --color-primary-dark: #00cc99;
+  --color-primary-glow: rgba(0, 255, 204, 0.2);
+  --color-accent: #06b6d4;
+  --color-accent-light: #22d3ee;
+  --color-emerald: #10b981;
+  --color-rose: #f43f5e;
+  --color-dark: #1a1a1a;
+  --color-dark-lighter: #242424;
+  --color-dark-card: rgba(26, 26, 26, 0.65);
+  --color-surface: rgba(38, 38, 38, 0.45);
+  --color-glass: rgba(26, 26, 26, 0.5);
+  --color-text-primary: #f5f5ff;
+  --color-text-secondary: #b8b8d4;
+  --color-text-muted: #7a7a9e;
+  --color-border: rgba(0, 255, 204, 0.1);
+  --color-border-light: rgba(0, 255, 204, 0.18);
+  --color-aura-1: rgba(0, 255, 204, 0.18);
+  --color-aura-2: rgba(6, 182, 212, 0.14);
+  --color-aura-3: rgba(244, 63, 94, 0.1);
+  --font-sans: 'Sora', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', 'Sora', system-ui, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-dark);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-dark); }
+::-webkit-scrollbar-thumb { background: rgba(0, 255, 204, 0.35); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 204, 0.5); }
+
+/* ── Chat Widget: SaaS-style message layout ───────────────────── */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.chat-row.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+.chat-avatar {
+  flex-shrink: 0;
+}
+.chat-bubble {
+  word-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.6;
+}
+.chat-bubble-user {
+  box-shadow: 0 2px 12px rgba(0, 255, 204, 0.2);
+  border: 2px solid rgba(0, 255, 204, 0.35);
+}
+.chat-bubble-assistant {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 255, 204, 0.12);
+  border: 2px solid rgba(0, 255, 204, 0.15);
+}
+.chat-message-content {
+  word-wrap: break-word;
+}
+.chat-message-content p {
+  margin-top: 0.625em;
+}
+.chat-message-content p:first-child {
+  margin-top: 0;
+}
+.chat-message-content ul {
+  margin-top: 0.625em;
+  padding-left: 0;
+}
+.chat-message-content ul:first-child {
+  margin-top: 0;
+}
+.chat-message-content li {
+  line-height: 1.55;
+}
+/* Desktop: center content, improve readability */
+@media (min-width: 1024px) {
+  .chat-messages {
+    max-width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .chat-bubble {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .chat-message-content p,
+  .chat-message-content li {
+    line-height: 1.65;
+  }
+}
+
+/* Hero: "Open to new opportunities" badge - spacing below profile picture */
+.hero-opportunities-badge {
+  margin-top: 1rem;
+}
+@media (max-width: 1023px) {
+  .hero-opportunities-badge {
+    margin-top: 2rem !important;
+  }
+}
+
+/* ── Aura Animations ────────────────────────────────── */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  25% { transform: translate(30px, -40px) scale(1.1); opacity: 0.7; }
+  50% { transform: translate(-20px, 20px) scale(0.95); opacity: 0.4; }
+  75% { transform: translate(40px, 30px) scale(1.05); opacity: 0.6; }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  33% { transform: translate(-40px, 30px) scale(1.15); opacity: 0.6; }
+  66% { transform: translate(30px, -20px) scale(0.9); opacity: 0.3; }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+  50% { transform: translate(20px, -30px) rotate(5deg); opacity: 0.5; }
+}
+
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 204, 0.0), inset 0 0 20px rgba(0, 255, 204, 0.0); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 204, 0.12), inset 0 0 30px rgba(0, 255, 204, 0.04); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes corner-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.3); }
+}
+
+/* ── Glass Card ─────────────────────────────────────── */
+.glass-card {
+  background: rgba(26, 26, 26, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 255, 204, 0.1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 255, 204, 0.22);
+  box-shadow:
+    0 0 30px rgba(0, 255, 204, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+/* Card stroke colors per section */
+#home .glass-card { border-color: rgba(0, 255, 204, 0.12); }
+#home .glass-card:hover { border-color: rgba(0, 255, 204, 0.24); }
+#about .glass-card { border-color: rgba(6, 182, 212, 0.14); }
+#about .glass-card:hover { border-color: rgba(6, 182, 212, 0.28); }
+#skills .glass-card { border-color: rgba(16, 185, 129, 0.14); }
+#skills .glass-card:hover { border-color: rgba(16, 185, 129, 0.28); }
+#projects .glass-card { border-color: rgba(168, 85, 247, 0.14); }
+#projects .glass-card:hover { border-color: rgba(168, 85, 247, 0.28); }
+#contact .glass-card { border-color: rgba(244, 63, 94, 0.12); }
+#contact .glass-card:hover { border-color: rgba(244, 63, 94, 0.24); }
+
+/* ── Aura Glow Border ───────────────────────────────── */
+.aura-border {
+  position: relative;
+}
+
+.aura-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 204, 0.35),
+    rgba(6, 182, 212, 0.2),
+    rgba(244, 63, 94, 0.15),
+    rgba(0, 255, 204, 0.3)
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 8s ease infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.aura-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Mobile Layout (max-width: 1023px) ──────────────────────────── */
+@media (max-width: 1023px) {
+  main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  #home,
+  #about,
+  #skills,
+  #projects,
+  #contact {
+    width: 100%;
+    max-width: 100%;
+  }
+  #home .max-w-7xl,
+  #about .max-w-7xl,
+  #skills .max-w-7xl,
+  #projects .max-w-7xl,
+  #contact .max-w-7xl {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .section-stroke {
+    max-width: 100%;
+  }
+  /* Reset desktop transforms - prevent content shifting off-screen on mobile */
+  #home .hero-profile-block,
+  #home .hero-text-block {
+    transform: none !important;
+  }
+  /* Prevent decorative blurs from causing horizontal overflow */
+  #skills,
+  #contact {
+    overflow-x: hidden;
+  }
+}
+/* Force single-column grids on small screens (under 768px) */
+@media (max-width: 767px) {
+  #about .section-stroke .grid,
+  #skills .section-stroke .grid,
+  #contact .grid,
+  #contact form .grid[class*="grid-cols"],
+  footer .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Section Divider ────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.22), rgba(6, 182, 212, 0.16), transparent);
+}
+
+/* ── Animated Section Stroke Outline ────────────────── */
+@property --stroke-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.section-stroke {
+  position: relative;
+  border-radius: 1.5rem;
+  background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Static subtle border visible at all times - different per section */
+.section-stroke::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  pointer-events: none;
+}
+#home .section-stroke::after { border-color: rgba(0, 255, 204, 0.25); }
+#about .section-stroke::after { border-color: rgba(6, 182, 212, 0.25); }
+#skills .section-stroke::after { border-color: rgba(16, 185, 129, 0.25); }
+#projects .section-stroke::after { border-color: rgba(168, 85, 247, 0.25); }
+#contact .section-stroke::after { border-color: rgba(244, 63, 94, 0.22); }
+
+/* Animated conic-gradient stroke */
+.section-stroke::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--stroke-angle),
+    transparent 0%,
+    rgba(6, 182, 212, 0.5) 8%,
+    rgba(34, 211, 238, 0.45) 16%,
+    rgba(6, 182, 212, 0.3) 22%,
+    transparent 30%,
+    transparent 50%,
+    rgba(34, 211, 238, 0.25) 56%,
+    transparent 62%,
+    transparent 75%,
+    rgba(6, 182, 212, 0.4) 82%,
+    rgba(16, 185, 129, 0.25) 88%,
+    transparent 95%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  animation: stroke-rotate 6s linear infinite;
+  z-index: 1;
+}
+
+@keyframes stroke-rotate {
+  to { --stroke-angle: 360deg; }
+}
+
+/* Corner accents for section stroke */
+.section-stroke .corner-accent {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-stroke .corner-accent::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: rgba(0, 255, 204, 0.6);
+  box-shadow: 0 0 10px 2px rgba(0, 255, 204, 0.4), 0 0 20px 4px rgba(0, 255, 204, 0.15);
+  animation: corner-pulse 3s ease-in-out infinite;
+}
+
+.section-stroke .corner-tl { top: -3px; left: -3px; }
+.section-stroke .corner-tl::before { background: rgba(6, 182, 212, 0.6); box-shadow: 0 0 10px 2px rgba(6,182,212,0.4), 0 0 20px 4px rgba(6,182,212,0.15); }
+.section-stroke .corner-tr { top: -3px; right: -3px; }
+.section-stroke .corner-tr::before { animation-delay: 0.75s; background: rgba(34, 211, 238, 0.6); box-shadow: 0 0 10px 2px rgba(34,211,238,0.4), 0 0 20px 4px rgba(34,211,238,0.15); }
+.section-stroke .corner-bl { bottom: -3px; left: -3px; }
+.section-stroke .corner-bl::before { animation-delay: 1.5s; background: rgba(6, 182, 212, 0.5); box-shadow: 0 0 10px 2px rgba(6,182,212,0.35), 0 0 20px 4px rgba(6,182,212,0.12); }
+.section-stroke .corner-br { bottom: -3px; right: -3px; }
+.section-stroke .corner-br::before { animation-delay: 2.25s; background: rgba(16, 185, 129, 0.5); box-shadow: 0 0 10px 2px rgba(16,185,129,0.35), 0 0 20px 4px rgba(16,185,129,0.12); }
+
+/* Edge glow lines along the border */
+.section-stroke .edge-glow-top,
+.section-stroke .edge-glow-bottom {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-stroke .edge-glow-top {
+  top: 0;
+  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.45), rgba(34,211,238,0.35), transparent);
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.section-stroke .edge-glow-bottom {
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,0.35), rgba(6,182,212,0.45), transparent);
+  animation: glow-pulse 4s ease-in-out infinite 2s;
+}
+
+/* ── Desktop Layout (min-width: 1024px) ───────────────────────────── */
+@media (min-width: 1024px) {
+  /* ═══ Section stroke: more visible boundary ═══ */
+  #home .section-stroke,
+  #about .section-stroke,
+  #skills .section-stroke,
+  #projects .section-stroke,
+  #contact .section-stroke {
+    background: rgba(26, 26, 26, 0.7);
+    box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.22), inset 0 1px 0 0 rgba(255, 255, 255, 0.02);
+  }
+  #home .section-stroke::after { border-width: 1px; border-color: rgba(0, 255, 204, 0.28); }
+  #about .section-stroke::after { border-width: 1px; border-color: rgba(6, 182, 212, 0.28); }
+  #skills .section-stroke::after { border-width: 1px; border-color: rgba(16, 185, 129, 0.28); }
+  #projects .section-stroke::after { border-width: 1px; border-color: rgba(168, 85, 247, 0.28); }
+  #contact .section-stroke::after { border-width: 1px; border-color: rgba(244, 63, 94, 0.25); }
+
+  /* Card boundaries: different stroke per section */
+  #about .glass-card {
+    border-color: rgba(6, 182, 212, 0.22);
+    background: rgba(26, 26, 26, 0.65);
+  }
+  #skills .glass-card {
+    border-color: rgba(16, 185, 129, 0.22);
+    background: rgba(26, 26, 26, 0.65);
+  }
+  #projects .glass-card {
+    border-color: rgba(168, 85, 247, 0.22);
+    background: rgba(26, 26, 26, 0.65);
+  }
+  #contact .glass-card {
+    border-color: rgba(244, 63, 94, 0.2);
+    background: rgba(26, 26, 26, 0.65);
+  }
+
+  /* 4) Internal spacing: consistent rhythm */
+  #about .section-stroke > div > .grid:first-of-type {
+    gap: 1.5rem 1.75rem;
+  }
+  #about .section-stroke > div > .grid:last-of-type {
+    margin-top: 2.5rem;
+    gap: 1.5rem 1.75rem;
+  }
+  #skills .section-stroke .grid[class*="grid-cols"] {
+    gap: 1.5rem 1.75rem;
+  }
+  #projects .space-y-5,
+  #projects .space-y-6,
+  #projects .space-y-8 {
+    gap: 2rem;
+  }
+
+  /* 5) Section header to content spacing */
+  #about .text-center:has(h2),
+  #skills .text-center:has(h2),
+  #projects .text-center:has(h2),
+  #contact .text-center:has(h2) {
+    margin-bottom: 2.5rem;
+  }
+
+  /* 6) Paragraph spacing within cards */
+  #about .glass-card p,
+  #skills .glass-card p {
+    line-height: 1.65;
+  }
+
+  /* ═══ Original desktop layout rules ═══ */
+
+  /* 1) Centered main container */
+  #home .max-w-7xl,
+  #about .max-w-7xl,
+  #skills .max-w-7xl,
+  #projects .max-w-7xl,
+  #contact .max-w-7xl {
+    max-width: 1150px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 2) Hero: reduce profile image so it doesn't dominate */
+  #home div.rounded-full.overflow-hidden:has(img[alt="Oussama Hitte"]) {
+    max-width: 260px !important;
+    width: 260px !important;
+    height: 260px !important;
+  }
+  /* Hero profile wrapper: match 260px on desktop so badges align with image */
+  #home .hero-profile-wrapper {
+    width: 260px !important;
+    height: 260px !important;
+  }
+  /* Profile block (picture + badges): shift left on desktop */
+  #home .hero-profile-block {
+    transform: translateX(-32px);
+  }
+  /* 5+ Years badge: same as mobile (position, padding, font) */
+  #home .badge-5years {
+    bottom: -4px !important;
+    right: -4px !important;
+    padding: 6px 12px !important;
+  }
+  #home .badge-5years span {
+    font-size: 11px !important;
+  }
+
+  /* Hero text blocks: shift right on desktop */
+  #home .hero-text-block {
+    transform: translateX(28px);
+  }
+  /* 3) Typography: reduce heading sizes, improve readability */
+  #home h1 {
+    font-size: clamp(2rem, 3.5vw, 3.25rem) !important;
+    line-height: 1.15 !important;
+  }
+  #about h2,
+  #skills h2,
+  #projects h2,
+  #contact h2 {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  /* Section intro paragraphs: keep centered like mobile */
+  #about .text-center:has(h2),
+  #skills .text-center:has(h2),
+  #projects .text-center:has(h2),
+  #contact .text-center:has(h2) {
+    text-align: center !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #about .text-center:has(h2) p,
+  #skills .text-center:has(h2) p,
+  #projects .text-center:has(h2) p,
+  #contact .text-center:has(h2) p {
+    max-width: 48ch !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    line-height: 1.7;
+    text-align: center;
+  }
+  /* Hero bio: keep left-aligned (only this paragraph stays left) */
+  #home p.text-text-secondary {
+    max-width: 42ch;
+    margin-left: 0;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  /* 4) Skills: 2-column grid */
+  #skills .grid[class*="grid-cols"] {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
+  }
+
+  /* 5) Projects: 2-column grid */
+  #projects .space-y-5,
+  #projects .space-y-6,
+  #projects .space-y-8 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  #projects .space-y-5 > *,
+  #projects .space-y-6 > *,
+  #projects .space-y-8 > * {
+    margin-top: 0 !important;
+  }
+
+  /* 6) Contact: balanced 2-column layout */
+  #contact .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  #contact .grid > * {
+    grid-column: span 1;
+  }
+
+  /* 7) Contact form inputs: professional dark UI styling */
+  #contact form input,
+  #contact form textarea {
+    border-radius: 13px !important;
+    border: 1px solid rgba(0, 255, 204, 0.2) !important;
+    background: rgba(26, 26, 26, 0.7) !important;
+    padding: 0.875rem 1.125rem !important;
+    min-height: 48px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  #contact form input:hover,
+  #contact form textarea:hover {
+    border-color: rgba(0, 255, 204, 0.35) !important;
+  }
+  #contact form input:focus,
+  #contact form textarea:focus {
+    outline: none !important;
+    border-color: rgba(0, 255, 204, 0.6) !important;
+    box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.2), 0 0 16px rgba(0, 255, 204, 0.08) !important;
+  }
+  #contact form textarea {
+    min-height: 140px;
+    padding: 1rem 1.125rem !important;
+  }
+  #contact form label {
+    color: rgba(240, 240, 255, 0.9) !important;
+    font-weight: 600;
+  }
+  #contact form input::placeholder,
+  #contact form textarea::placeholder {
+    color: rgba(160, 160, 192, 0.7) !important;
+  }
+  #contact form .grid[class*="grid-cols"] {
+    gap: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem !important;
+  }
+  #contact form .mb-4 {
+    margin-bottom: 1.25rem !important;
+  }
+  #contact form .mb-6 {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+/* Contact form: clarity & borders (all screens) */
+#contact form input,
+#contact form textarea {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 204, 0.18);
+  background: rgba(26, 26, 26, 0.7);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+#contact form input:focus,
+#contact form textarea:focus {
+  outline: none;
+  border-color: rgba(0, 255, 204, 0.5);
+  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.15);
+}
+#contact form label {
+  color: rgba(200, 200, 225, 0.95);
+}
+#contact form input::placeholder,
+#contact form textarea::placeholder {
+  color: rgba(160, 160, 192, 0.75);
+}
