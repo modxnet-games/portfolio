@@ -82,7 +82,7 @@ export default function Hero() {
                   {imgError ? (
                     <span className="font-heading text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary via-primary-light to-accent bg-clip-text text-transparent">OH</span>
                   ) : (
-                    <img src="/profile_pic.png" alt="Oussama Hitte" className="w-full h-full object-cover" onError={() => setImgError(true)} />
+                    <img src="/profile_pic.jpg" alt="Oussama Hitte" className="w-full h-full object-cover" onError={() => setImgError(true)} />
                   )}
                 </div>
                 {/* Full Stack & 5+ Years - positioned relative to image wrapper only */}

@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="py-10 sm:py-12 md:py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
           {/* Brand */}
           <div>
-            <a href="#home" onClick={(e) => { e.preventDefault(); handleClick('#home'); }} className="font-heading text-xl sm:text-2xl font-bold tracking-tight inline-block mb-3 sm:mb-4">
+            <a href="#home" onClick={(e) => { e.preventDefault(); handleClick('#home'); }} className="font-heading text-xl sm:text-2xl font-bold tracking-tight inline-block mb-3 sm:mb-4 ml-1">
               <span className="bg-gradient-to-r from-primary-light to-accent bg-clip-text text-transparent">O</span>
               <span className="text-text-primary">H</span>
               <span className="bg-gradient-to-r from-accent to-primary-light bg-clip-text text-transparent">.</span>
