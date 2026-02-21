@@ -1,0 +1,12 @@
+# Explicit Nixpacks config for Railway monorepo build
+[phases.setup]
+nixPkgs = ["nodejs_18"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "cd backend && NODE_ENV=production node server.js"
