@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, User, Loader2, ArrowRight } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Loader2, ArrowRight, Sparkles } from 'lucide-react';
 import { WhatsAppIcon } from './SocialIcons';
 
 interface Message {
@@ -23,7 +23,7 @@ function formatMessageContent(content: string) {
     const trimmed = line.trim();
 
     if (!trimmed) {
-      elements.push(<div key={key++} className="h-3" aria-hidden />);
+      elements.push(<div key={key++} className="h-2.5" aria-hidden />);
       i++;
       continue;
     }
@@ -43,10 +43,10 @@ function formatMessageContent(content: string) {
       }
       if (listItems.length > 0) {
         elements.push(
-          <ul key={key++} className="list-none mt-2.5 space-y-1.5 pl-0 first:mt-0">
+          <ul key={key++} className="list-none mt-2 space-y-1.5 pl-0 first:mt-0">
             {listItems.map((item, j) => (
-              <li key={j} className="flex gap-2.5 items-start">
-                <span className="text-accent flex-shrink-0 mt-1" aria-hidden>•</span>
+              <li key={j} className="flex gap-2 items-start">
+                <span className="text-primary-light/70 flex-shrink-0 mt-0.5 text-[10px]" aria-hidden>▸</span>
                 <span className="leading-relaxed text-[13px]">{item}</span>
               </li>
             ))}
@@ -67,7 +67,7 @@ function formatMessageContent(content: string) {
     }
     if (paragraphLines.length > 0) {
       elements.push(
-        <p key={key++} className="mt-2.5 leading-relaxed first:mt-0 text-[13px]">
+        <p key={key++} className="mt-2 leading-relaxed first:mt-0 text-[13px]">
           {paragraphLines.join(' ')}
         </p>
       );
@@ -81,6 +81,12 @@ const API_URL = import.meta.env.DEV
   ? 'http://localhost:5000/api/chat'
   : '/api/chat';
 const WHATSAPP_URL = 'https://wa.me/212659404133';
+
+const quickActions = [
+  'What services do you offer?',
+  'Show me your projects',
+  'How can we work together?',
+];
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -115,17 +121,17 @@ export default function ChatWidget() {
         {
           role: 'assistant',
           content:
-            "Hey! I'm Oussama. Welcome to my portfolio. Ask me anything about my services, projects, or let's discuss working together!",
+            "Hey! 👋 I'm Oussama. Welcome to my portfolio. Ask me anything about my services, projects, or let's discuss working together!",
         },
       ]);
     }
   }, [open, hasGreeted, messages.length]);
 
-  const sendMessage = async () => {
-    const text = input.trim();
-    if (!text || loading || limited) return;
+  const sendMessage = async (text?: string) => {
+    const msgText = text || input.trim();
+    if (!msgText || loading || limited) return;
 
-    const userMsg: Message = { role: 'user', content: text };
+    const userMsg: Message = { role: 'user', content: msgText };
     const updated = [...messages, userMsg];
     setMessages(updated);
     setInput('');
@@ -168,58 +174,67 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Floating button with aura glow */}
+      {/* Floating button — premium design */}
       <AnimatePresence>
         {!open && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.08 }}
+            whileHover={{ scale: 1.06, y: -2 }}
             whileTap={{ scale: 0.92 }}
             onClick={() => setOpen(true)}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary-dark text-white shadow-[0_0_35px_rgba(0,255,204,0.4)] flex items-center justify-center"
+            className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 group"
           >
-            <MessageCircle size={22} />
-            <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald rounded-full border-2 border-dark animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+            {/* Outer glow ring */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-accent/20 blur-xl group-hover:blur-2xl transition-all duration-500 scale-110" />
+            {/* Button body */}
+            <div className="relative w-14 h-14 sm:w-[60px] sm:h-[60px] rounded-2xl bg-gradient-to-br from-[#0f0f0f] to-[#1a1a1a] border border-primary/25 flex items-center justify-center shadow-[0_4px_30px_rgba(0,255,204,0.15)] group-hover:border-primary/40 group-hover:shadow-[0_4px_40px_rgba(0,255,204,0.25)] transition-all duration-500">
+              <MessageCircle size={22} className="text-primary-light group-hover:scale-110 transition-transform duration-300" />
+              {/* Online dot */}
+              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald rounded-full border-2 border-[#0f0f0f] animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+            </div>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Chat panel - aura glass theme */}
+      {/* Chat panel */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, y: 16, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="chat-panel chat-container fixed z-50 inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[360px] sm:h-[500px] sm:rounded-2xl flex flex-col overflow-hidden"
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="chat-panel chat-container fixed z-50 inset-0 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[380px] sm:h-[520px] sm:rounded-2xl flex flex-col overflow-hidden"
             style={{
-              background: 'rgba(26, 26, 26, 0.9)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              border: '1px solid rgba(0, 255, 204, 0.12)',
-              boxShadow: '0 0 50px rgba(0,255,204,0.08), 0 24px 64px rgba(0,0,0,0.45)',
+              background: 'rgba(15, 15, 15, 0.95)',
+              backdropFilter: 'blur(30px)',
+              WebkitBackdropFilter: 'blur(30px)',
+              border: '1px solid rgba(0, 255, 204, 0.1)',
+              boxShadow: '0 0 60px rgba(0,255,204,0.06), 0 24px 64px rgba(0,0,0,0.5)',
             }}
           >
             {/* Header */}
-            <div className="chat-header flex items-center justify-between px-4 py-3 border-b border-border/50 flex-shrink-0" style={{ background: 'rgba(26, 26, 26, 0.7)' }}>
-              <div className="flex items-center gap-2.5">
+            <div className="chat-header flex items-center justify-between px-4 py-3.5 border-b border-white/[0.06] flex-shrink-0" style={{ background: 'rgba(15, 15, 15, 0.8)' }}>
+              <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_0_15px_rgba(0,255,204,0.3)]">
-                    <Bot size={16} className="text-white" />
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/15 border border-primary/15 flex items-center justify-center">
+                    <Sparkles size={18} className="text-primary-light" />
                   </div>
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald rounded-full border-2 border-dark shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald rounded-full border-2 border-[#0f0f0f] shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
                 </div>
                 <div>
                   <h3 className="text-[13px] font-semibold text-text-primary font-heading">Oussama Hitte</h3>
-                  <p className="text-[10px] text-emerald font-medium">Online</p>
+                  <p className="text-[10px] text-emerald font-medium flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 bg-emerald rounded-full inline-block" />
+                    Online · Replies instantly
+                  </p>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-glass text-text-muted hover:text-text-primary transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/[0.05] text-text-muted hover:text-text-primary transition-all duration-200"
               >
                 <X size={16} />
               </button>
@@ -233,26 +248,26 @@ export default function ChatWidget() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className={`chat-row flex gap-3.5 mb-5 last:mb-0 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
+                  className={`chat-row flex gap-3 mb-4 last:mb-0 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
                 >
                   <div
-                    className={`chat-avatar w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 self-end ${
+                    className={`chat-avatar w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 self-end ${
                       msg.role === 'assistant'
-                        ? 'bg-gradient-to-br from-primary to-accent shadow-[0_0_12px_rgba(0,255,204,0.3)]'
-                        : 'bg-surface/80 border border-border/50'
+                        ? 'bg-gradient-to-br from-primary/15 to-accent/10 border border-primary/15'
+                        : 'bg-white/[0.04] border border-white/[0.08]'
                     }`}
                   >
                     {msg.role === 'assistant' ? (
-                      <Bot size={14} className="text-white" />
+                      <Sparkles size={13} className="text-primary-light" />
                     ) : (
-                      <User size={14} className="text-text-secondary" />
+                      <User size={13} className="text-text-secondary" />
                     )}
                   </div>
                   <div
-                    className={`chat-bubble max-w-[68%] min-w-[100px] px-5 py-3.5 text-[13px] leading-relaxed ${
+                    className={`chat-bubble max-w-[72%] min-w-[80px] px-4 py-3 text-[13px] leading-relaxed ${
                       msg.role === 'user'
-                        ? 'chat-bubble-user bg-gradient-to-r from-primary to-primary-dark text-[#1a1a1a] rounded-2xl rounded-br-md'
-                        : 'chat-bubble-assistant bg-dark-card/80 text-text-primary rounded-2xl rounded-bl-md'
+                        ? 'chat-bubble-user bg-gradient-to-r from-primary to-primary-dark text-[#0a0a0a] rounded-2xl rounded-br-md font-medium'
+                        : 'chat-bubble-assistant bg-white/[0.04] border border-white/[0.06] text-text-primary rounded-2xl rounded-bl-md'
                     }`}
                   >
                     {msg.role === 'assistant' ? (
@@ -266,14 +281,38 @@ export default function ChatWidget() {
                 </motion.div>
               ))}
 
+              {/* Quick actions — show only after greeting */}
+              {messages.length === 1 && messages[0].role === 'assistant' && !loading && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="mt-3 flex flex-wrap gap-2"
+                >
+                  {quickActions.map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => sendMessage(q)}
+                      className="px-3 py-1.5 text-[11px] font-medium text-primary-light/80 border border-primary/15 bg-primary/5 rounded-full hover:bg-primary/10 hover:border-primary/25 transition-all duration-200"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+
               {loading && (
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="chat-row flex gap-3.5 mb-5">
-                  <div className="chat-avatar w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 self-end shadow-[0_0_12px_rgba(0,255,204,0.3)]">
-                    <Bot size={14} className="text-white" />
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="chat-row flex gap-3 mb-4">
+                  <div className="chat-avatar w-8 h-8 rounded-xl bg-gradient-to-br from-primary/15 to-accent/10 border border-primary/15 flex items-center justify-center flex-shrink-0 self-end">
+                    <Sparkles size={13} className="text-primary-light" />
                   </div>
-                  <div className="chat-bubble chat-bubble-assistant max-w-[68%] min-w-[100px] px-5 py-3.5 bg-dark-card/80 rounded-2xl rounded-bl-md flex items-center gap-2">
-                    <Loader2 size={14} className="text-accent animate-spin flex-shrink-0" />
-                    <span className="text-[12px] text-text-muted">Thinking...</span>
+                  <div className="chat-bubble chat-bubble-assistant max-w-[72%] min-w-[80px] px-4 py-3 bg-white/[0.04] border border-white/[0.06] rounded-2xl rounded-bl-md flex items-center gap-2">
+                    <div className="flex gap-1">
+                      <span className="w-1.5 h-1.5 bg-primary-light/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-1.5 h-1.5 bg-primary-light/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 bg-primary-light/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                    </div>
+                    <span className="text-[11px] text-text-muted ml-1">Typing...</span>
                   </div>
                 </motion.div>
               )}
@@ -287,17 +326,17 @@ export default function ChatWidget() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="absolute inset-0 z-20 flex items-center justify-center p-4"
-                    style={{ background: 'rgba(26, 26, 26, 0.85)', backdropFilter: 'blur(12px)' }}
+                    style={{ background: 'rgba(15, 15, 15, 0.9)', backdropFilter: 'blur(16px)' }}
                   >
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9, y: 12 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="w-full max-w-[300px] rounded-2xl overflow-hidden border border-border-light/30 shadow-[0_0_40px_rgba(37,211,102,0.1)]"
-                      style={{ background: 'rgba(26,26,26,0.9)' }}
+                      className="w-full max-w-[300px] rounded-2xl overflow-hidden border border-[#25D366]/20 shadow-[0_0_40px_rgba(37,211,102,0.1)]"
+                      style={{ background: 'rgba(20,20,20,0.95)' }}
                     >
-                      <div className="bg-gradient-to-br from-[#25D366]/20 to-[#25D366]/5 px-5 pt-6 pb-4 text-center">
-                        <div className="w-14 h-14 mx-auto rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.3)] mb-3">
+                      <div className="bg-gradient-to-br from-[#25D366]/15 to-[#25D366]/5 px-5 pt-6 pb-4 text-center">
+                        <div className="w-14 h-14 mx-auto rounded-2xl bg-[#25D366] flex items-center justify-center shadow-[0_0_25px_rgba(37,211,102,0.3)] mb-3">
                           <WhatsAppIcon size={26} />
                         </div>
                         <h3 className="font-heading text-base font-bold text-text-primary">
@@ -331,8 +370,8 @@ export default function ChatWidget() {
               </AnimatePresence>
             </div>
 
-            {/* Input */}
-            <div className="chat-input-area chat-input px-4 py-3 border-t border-border/50 flex-shrink-0" style={{ background: 'rgba(26, 26, 26, 0.7)' }}>
+            {/* Input area */}
+            <div className="chat-input-area chat-input px-4 py-3 border-t border-white/[0.06] flex-shrink-0" style={{ background: 'rgba(15, 15, 15, 0.85)' }}>
               {limited ? (
                 <a
                   href={WHATSAPP_URL}
@@ -352,20 +391,20 @@ export default function ChatWidget() {
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={handleKeyDown}
-                      placeholder="Ask about projects, skills, or collaboration..."
+                      placeholder="Ask about projects, skills, or hiring..."
                       disabled={loading}
-                      className="flex-1 px-4 py-2.5 bg-dark-card/60 border border-border/60 rounded-full text-[13px] text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/30 focus:shadow-[0_0_20px_rgba(0,255,204,0.12)] transition-all disabled:opacity-40"
+                      className="flex-1 px-4 py-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl text-[13px] text-text-primary placeholder:text-text-muted/40 focus:outline-none focus:ring-1 focus:ring-primary/20 focus:border-primary/20 transition-all disabled:opacity-40"
                     />
                     <button
-                      onClick={sendMessage}
+                      onClick={() => sendMessage()}
                       disabled={!input.trim() || loading}
-                      className="w-9 h-9 bg-gradient-to-r from-primary to-primary-dark hover:shadow-[0_0_15px_rgba(0,255,204,0.3)] disabled:from-primary/25 disabled:to-primary-dark/25 disabled:cursor-not-allowed text-white rounded-full flex items-center justify-center transition-all flex-shrink-0"
+                      className="w-10 h-10 bg-gradient-to-br from-primary/20 to-accent/15 border border-primary/20 hover:border-primary/35 hover:from-primary/30 hover:to-accent/25 disabled:opacity-25 disabled:cursor-not-allowed text-primary-light rounded-xl flex items-center justify-center transition-all duration-300 flex-shrink-0"
                     >
-                      <Send size={14} />
+                      <Send size={15} />
                     </button>
                   </div>
-                  <p className="text-[9px] text-text-muted text-center mt-1.5 tracking-wide">
-                    AI assistant &middot; Replies as Oussama Hitte
+                  <p className="text-[9px] text-text-muted/50 text-center mt-1.5 tracking-wide">
+                    AI assistant · Replies as Oussama Hitte
                   </p>
                 </>
               )}

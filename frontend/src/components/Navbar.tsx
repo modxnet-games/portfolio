@@ -48,37 +48,36 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-dark/60 backdrop-blur-2xl border-b border-border shadow-[0_4px_30px_rgba(0,255,204,0.06)]'
+          ? 'bg-[#0f0f0f]/80 backdrop-blur-2xl border-b border-white/[0.04]'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 3-column grid: Logo | Centered Links | CTA */}
-        <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] items-center h-[72px]">
+        {/* Desktop: 3-column grid */}
+        <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] items-center h-[68px]">
           {/* Left: Logo */}
-          <div className="flex items-center ml-6 md:ml-8">
+          <div className="flex items-center">
             <motion.a
               href="#home"
               onClick={(e) => { e.preventDefault(); handleClick('#home'); }}
-              className="font-heading text-2xl font-bold tracking-tight"
+              className="font-heading text-xl font-bold tracking-tight"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              <span className="bg-gradient-to-r from-primary-light to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(0,255,204,0.5)]">O</span>
+              <span className="bg-gradient-to-r from-primary-light to-accent bg-clip-text text-transparent">O</span>
               <span className="text-text-primary">H</span>
-              <span className="bg-gradient-to-r from-accent to-primary-light bg-clip-text text-transparent">.</span>
+              <span className="text-text-muted">.</span>
             </motion.a>
           </div>
 
-          {/* Center: Navigation links in a pill */}
+          {/* Center: Navigation pill */}
           <div
-            className="flex items-center gap-2 px-2.5 py-1.5 rounded-full"
+            className="flex items-center gap-1 px-2 py-1.5 rounded-full"
             style={{
-              background: 'rgba(26, 26, 26, 0.45)',
+              background: 'rgba(15, 15, 15, 0.5)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(0, 255, 204, 0.08)',
-              boxShadow: '0 0 20px rgba(0,255,204,0.04), inset 0 1px 0 rgba(255,255,255,0.02)',
+              border: '1px solid rgba(255, 255, 255, 0.04)',
             }}
           >
             {navLinks.map((link) => {
@@ -88,7 +87,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleClick(link.href); }}
-                  className={`relative px-5 py-2 text-sm font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
+                  className={`relative px-4 py-2 text-[13px] font-medium rounded-full transition-all duration-300 whitespace-nowrap ${
                     isActive
                       ? 'text-text-primary'
                       : 'text-text-muted hover:text-text-secondary'
@@ -100,9 +99,8 @@ export default function Navbar() {
                       layoutId="nav-pill"
                       className="absolute inset-0 rounded-full -z-10"
                       style={{
-                        background: 'linear-gradient(135deg, rgba(0,255,204,0.15), rgba(6,182,212,0.08))',
-                        border: '1px solid rgba(0,255,204,0.2)',
-                        boxShadow: '0 0 12px rgba(0,255,204,0.1), inset 0 1px 0 rgba(255,255,255,0.04)',
+                        background: 'rgba(255, 255, 255, 0.06)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
                       }}
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
@@ -112,45 +110,45 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right: CTA Button */}
+          {/* Right: CTA */}
           <div className="flex items-center justify-end">
             <motion.a
               href="#contact"
               onClick={(e) => { e.preventDefault(); handleClick('#contact'); }}
-              whileHover={{ scale: 1.04, y: -1 }}
+              whileHover={{ scale: 1.03, y: -1 }}
               whileTap={{ scale: 0.97 }}
-              className="px-7 py-3 text-[#1a1a1a] text-sm sm:text-base font-semibold rounded-full border-2 border-primary/50 flex items-center gap-2 transition-shadow duration-300"
+              className="px-5 py-2.5 text-[#0f0f0f] text-[13px] font-semibold rounded-full flex items-center gap-1.5 transition-shadow duration-300"
               style={{
                 background: 'linear-gradient(135deg, #00ffcc, #00cc99)',
-                boxShadow: '0 0 20px rgba(0,255,204,0.25), 0 4px 12px rgba(0,255,204,0.2)',
+                boxShadow: '0 0 16px rgba(0,255,204,0.2)',
               }}
             >
               Hire Me
-              <ArrowUpRight size={16} className="text-[#1a1a1a]" />
+              <ArrowUpRight size={14} />
             </motion.a>
           </div>
         </div>
 
-        {/* Mobile header row */}
-        <div className="flex md:hidden items-center justify-between h-16">
+        {/* Mobile header */}
+        <div className="flex md:hidden items-center justify-between h-14">
           <motion.a
             href="#home"
             onClick={(e) => { e.preventDefault(); handleClick('#home'); }}
-            className="font-heading text-xl font-bold tracking-tight ml-5"
+            className="font-heading text-lg font-bold tracking-tight ml-1"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            <span className="bg-gradient-to-r from-primary-light to-accent bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(0,255,204,0.5)]">O</span>
+            <span className="bg-gradient-to-r from-primary-light to-accent bg-clip-text text-transparent">O</span>
             <span className="text-text-primary">H</span>
-            <span className="bg-gradient-to-r from-accent to-primary-light bg-clip-text text-transparent">.</span>
+            <span className="text-text-muted">.</span>
           </motion.a>
 
           <button
-            className="w-11 h-11 flex items-center justify-center rounded-xl text-text-secondary hover:text-text-primary hover:bg-glass transition-colors -mr-1"
+            className="w-10 h-10 flex items-center justify-center rounded-xl text-text-muted hover:text-text-primary transition-colors -mr-1"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -163,13 +161,13 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-0 top-16 bg-dark/90 backdrop-blur-3xl z-40"
+            className="md:hidden fixed inset-0 top-14 bg-[#0f0f0f]/95 backdrop-blur-3xl z-40"
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="flex flex-col items-center justify-center h-full gap-3 px-6 pb-24"
+              className="flex flex-col items-center justify-center h-full gap-2 px-6 pb-24"
             >
               {navLinks.map((link, i) => (
                 <motion.a
@@ -178,9 +176,9 @@ export default function Navbar() {
                   onClick={(e) => { e.preventDefault(); handleClick(link.href); }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 * i }}
-                  className={`text-2xl sm:text-3xl font-heading font-semibold py-3 px-4 transition-colors ${
-                    activeSection === link.href.slice(1) ? 'text-primary-light drop-shadow-[0_0_10px_rgba(0,255,204,0.5)]' : 'text-text-secondary'
+                  transition={{ delay: 0.06 * i }}
+                  className={`text-xl font-heading font-medium py-3 px-4 transition-colors ${
+                    activeSection === link.href.slice(1) ? 'text-primary-light' : 'text-text-muted'
                   }`}
                 >
                   {link.name}
@@ -191,8 +189,8 @@ export default function Navbar() {
                 onClick={(e) => { e.preventDefault(); handleClick('#contact'); }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-6 px-10 py-4 bg-gradient-to-r from-primary to-primary-dark text-[#1a1a1a] text-lg font-semibold rounded-full border-2 border-primary/50 shadow-[0_0_30px_rgba(0,255,204,0.3)]"
+                transition={{ delay: 0.4 }}
+                className="mt-6 px-8 py-3.5 bg-gradient-to-r from-primary to-primary-dark text-[#0f0f0f] text-base font-semibold rounded-full"
               >
                 Hire Me
               </motion.a>

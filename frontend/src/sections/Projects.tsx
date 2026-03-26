@@ -1,29 +1,29 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink, Github, ChevronRight, Layers, Monitor, Gamepad2, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ExternalLink, Github, ChevronRight, Monitor, Gamepad2, ShoppingCart, ArrowRight } from 'lucide-react';
 import SectionStroke from '../components/SectionStroke';
 
 const projects = [
   {
     id: 1,
-    title: 'Klingmotionai',
-    subtitle: 'AI-Powered Video Generation Platform',
+    title: 'Madilik.ma',
+    subtitle: 'Modern E-Commerce Store & Admin Platform',
     description:
-      'Engineered a production-ready AI video generation platform that enables users to create synchronized character animations. Built with a scalable full-stack architecture handling file uploads, real-time processing, and secure authentication.',
-    impact: 'End-to-end AI product with secure auth, multi-model support, and production-grade UX.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Express', 'Tailwind CSS', 'Vite', 'Google OAuth'],
+      'A full-stack e-commerce platform featuring a customized storefront, robust shopping cart, and a comprehensive admin dashboard with image uploads, secure order management, and email notifications.',
+    tags: ['Next.js', 'React', 'Prisma', 'Tailwind CSS', 'Zustand', 'Node.js'],
     category: 'Full Stack',
-    icon: Layers,
+    icon: ShoppingCart,
+    liveUrl: 'https://madilik.ma',
+    githubUrl: '',
     features: [
-      'Secure Google OAuth 2.0 authentication flow',
-      'Multi-model AI video generation pipeline',
-      'Chunked file uploads with real-time progress',
-      'Configurable quality output (720p / 1080p)',
-      'Motion precision controls (Exact / Partial)',
-      'Fully responsive UI with smooth animations',
+      'High-performance Next.js Server Components',
+      'Secure authentication with Iron Session',
+      'Database modeling and management via Prisma',
+      'Custom shipping label & order invoice generation',
+      'Newsletter subscription and email collection',
+      'Automated language detection logic',
     ],
-    gradient: 'from-violet-500 to-purple-600',
-    glow: 'rgba(0,255,204,0.25)',
+    gradient: 'from-violet-500/80 to-purple-600/80',
     accentColor: '#8b5cf6',
   },
   {
@@ -31,11 +31,12 @@ const projects = [
     title: 'ModXnet.com',
     subtitle: 'Full-Scale Gaming Distribution Platform',
     description:
-      'Designed and developed a comprehensive gaming distribution platform serving a complete content management ecosystem. Features include user authentication, game catalogs with advanced filtering, community engagement tools, and a full admin dashboard.',
-    impact: 'Complete platform with admin panel, user system, and content management for scale.',
+      'A comprehensive gaming distribution platform with user authentication, game catalogs with advanced filtering, community engagement tools, and a full admin dashboard for content management.',
     tags: ['Node.js', 'Express', 'SQLite', 'HTML/CSS/JS', 'Passport.js', 'Nodemailer'],
     category: 'Web Platform',
     icon: Monitor,
+    liveUrl: 'https://modxnet.com',
+    githubUrl: '',
     features: [
       'Dual authentication (Email + Google OAuth)',
       'Searchable game catalog with filters & sorting',
@@ -44,8 +45,7 @@ const projects = [
       'Customizable user profiles with avatars',
       'Automated newsletter and email system',
     ],
-    gradient: 'from-cyan-500 to-blue-600',
-    glow: 'rgba(6,182,212,0.25)',
+    gradient: 'from-cyan-500/80 to-blue-600/80',
     accentColor: '#06b6d4',
   },
   {
@@ -53,11 +53,12 @@ const projects = [
     title: 'Streaming App',
     subtitle: 'Cross-Platform Game Streaming Client',
     description:
-      'Developed a high-performance Android client for PC game streaming with sub-frame latency. Features native hardware decoding, on-screen virtual controllers, and seamless network device discovery for a console-like experience on mobile.',
-    impact: 'Low-latency native performance with hardware decoding and intuitive controller UI.',
+      'A high-performance Android client for PC game streaming with sub-frame latency, native hardware decoding, on-screen virtual controllers, and seamless network device discovery.',
     tags: ['Java', 'Kotlin', 'Android SDK', 'C/C++ (NDK)', 'Gradle', 'JNI'],
     category: 'Mobile App',
     icon: Gamepad2,
+    liveUrl: '',
+    githubUrl: '',
     features: [
       'Hardware-accelerated video decoding pipeline',
       'Responsive virtual on-screen controller',
@@ -66,8 +67,7 @@ const projects = [
       'Optimized for sub-frame streaming latency',
       'Localized in multiple languages',
     ],
-    gradient: 'from-emerald-500 to-teal-600',
-    glow: 'rgba(16,185,129,0.25)',
+    gradient: 'from-emerald-500/80 to-teal-600/80',
     accentColor: '#10b981',
   },
 ];
@@ -78,110 +78,93 @@ export default function Projects() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
-    <section id="projects" className="py-16 sm:py-20 md:py-24 lg:py-28 relative">
-      <div className="section-divider" />
-
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-primary/6 rounded-full blur-[120px] sm:blur-[180px] pointer-events-none" />
+    <section id="projects" className="py-20 sm:py-24 md:py-28 lg:py-32 relative">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-primary/4 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10 sm:mb-14 md:mb-16"
+          className="text-center mb-12 sm:mb-14 md:mb-16"
         >
-          <span className="font-mono text-xs sm:text-sm lg:text-[15px] font-medium text-primary-light tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(0,255,204,0.4)]">
+          <span className="font-mono text-[11px] sm:text-xs font-medium text-primary-light/70 tracking-[0.2em] uppercase">
             Portfolio
           </span>
-          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-[3rem] font-bold mt-3 mb-4 sm:mb-5">
+          <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-[2.25rem] font-bold mt-3 mb-4">
             Featured{' '}
             <span className="bg-gradient-to-r from-primary via-primary-light to-accent bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient-shift_6s_ease_infinite]">
               Projects
             </span>
           </h2>
-          <p className="text-text-secondary text-sm sm:text-base md:text-lg lg:text-[17px] max-w-2xl mx-auto leading-relaxed">
-            Production-grade applications built with modern architectures, clean code practices, and a focus on performance, scalability, and user experience.
+          <p className="text-text-secondary text-sm sm:text-[15px] md:text-base max-w-lg mx-auto leading-relaxed">
+            Production-grade applications built with modern architectures and a focus on performance and user experience.
           </p>
         </motion.div>
 
         <SectionStroke className="p-4 sm:p-6 md:p-8 lg:p-10" delay={0.15}>
-          <div className="space-y-5 sm:space-y-6 md:space-y-8">
+          <div className="projects-grid flex flex-col gap-4 sm:gap-5">
             {projects.map((p, i) => (
               <motion.div
                 key={p.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.12 * i }}
-                className="group relative rounded-2xl glass-card aura-border overflow-hidden"
+                transition={{ duration: 0.5, delay: 0.1 * i }}
+                className="group relative rounded-xl glass-card overflow-hidden"
               >
                 {/* Top accent line */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: `linear-gradient(90deg, transparent, ${p.accentColor}, transparent)` }}
-                />
-                {/* Corner glow */}
-                <div
-                  className="absolute -top-24 -right-24 w-48 h-48 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-3xl pointer-events-none"
-                  style={{ background: p.glow }}
+                  className="absolute top-0 left-0 right-0 h-px opacity-40 group-hover:opacity-70 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(90deg, transparent, ${p.accentColor}80, transparent)` }}
                 />
 
-                <div className="relative p-5 sm:p-7 md:p-8 lg:p-10">
-                  <div className="flex items-start gap-4 sm:gap-5 mb-5 sm:mb-6">
+                <div className="relative p-5 sm:p-6 md:p-8">
+                  {/* Header */}
+                  <div className="flex items-start gap-3.5 sm:gap-4 mb-4">
                     <div
-                      className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${p.gradient} flex items-center justify-center flex-shrink-0`}
-                      style={{ boxShadow: `0 0 24px ${p.glow}` }}
+                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${p.gradient} flex items-center justify-center flex-shrink-0`}
                     >
-                      <p.icon className="text-white" size={24} />
+                      <p.icon className="text-white" size={20} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2.5 flex-wrap mb-1">
-                        <h3 className="font-heading text-xl sm:text-2xl md:text-[1.7rem] lg:text-[1.85rem] xl:text-[2rem] font-bold text-text-primary leading-tight">{p.title}</h3>
+                      <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                        <h3 className="font-heading text-lg sm:text-xl md:text-[1.4rem] font-bold text-text-primary leading-tight">{p.title}</h3>
                         <span
-                          className="px-3 py-1 text-[10px] sm:text-[11px] font-semibold rounded-full uppercase tracking-wider"
-                          style={{ background: `${p.accentColor}15`, color: p.accentColor }}
+                          className="px-2.5 py-0.5 text-[9px] sm:text-[10px] font-semibold rounded-full uppercase tracking-wider"
+                          style={{ background: `${p.accentColor}12`, color: p.accentColor }}
                         >
                           {p.category}
                         </span>
                       </div>
-                      <p className="text-text-secondary text-sm sm:text-base lg:text-[17px] xl:text-lg font-medium">{p.subtitle}</p>
+                      <p className="text-text-muted text-xs sm:text-[13px] font-medium">{p.subtitle}</p>
                     </div>
-                    <span className="hidden lg:block font-heading text-6xl xl:text-7xl font-black leading-none select-none opacity-[0.04] group-hover:opacity-[0.08] transition-opacity">
-                      {String(p.id).padStart(2, '0')}
-                    </span>
                   </div>
 
-                  <p className="text-text-secondary text-sm sm:text-[15px] md:text-base lg:text-[17px] xl:text-lg leading-relaxed mb-5 sm:mb-6 max-w-3xl">
+                  {/* Description */}
+                  <p className="text-text-secondary text-xs sm:text-[13px] md:text-sm leading-relaxed mb-4 max-w-2xl">
                     {p.description}
                   </p>
 
-                  <div className="flex items-start gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl mb-5 sm:mb-6"
-                    style={{ background: `${p.accentColor}08`, border: `1px solid ${p.accentColor}15` }}
-                  >
-                    <CheckCircle2 size={18} className="flex-shrink-0 mt-0.5" style={{ color: p.accentColor }} />
-                    <p className="text-text-secondary text-xs sm:text-sm lg:text-[15px] xl:text-base leading-relaxed">
-                      <span className="font-semibold text-text-primary">Key Result: </span>
-                      {p.impact}
-                    </p>
-                  </div>
-
-                  <div className="mb-5 sm:mb-6">
-                    <p className="text-text-muted text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold mb-2.5">Tech Stack</p>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  {/* Tags */}
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-1.5">
                       {p.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1.5 text-[10px] sm:text-xs lg:text-[13px] xl:text-sm font-medium glass-card text-text-secondary rounded-lg sm:rounded-full">
+                        <span key={tag} className="px-2.5 py-1 text-[10px] sm:text-[11px] font-medium bg-white/[0.03] border border-white/[0.06] text-text-muted rounded-md">
                           {tag}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mb-5 sm:mb-6">
+                  {/* Expandable features */}
+                  <div className="mb-4">
                     <button
                       onClick={() => setExpandedId(expandedId === p.id ? null : p.id)}
-                      className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition-colors py-1"
+                      className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold transition-colors py-1"
                       style={{ color: p.accentColor }}
                     >
-                      <ChevronRight size={16} className={`transition-transform duration-200 ${expandedId === p.id ? 'rotate-90' : ''}`} />
+                      <ChevronRight size={14} className={`transition-transform duration-200 ${expandedId === p.id ? 'rotate-90' : ''}`} />
                       {expandedId === p.id ? 'Hide' : 'View'} Key Features
                     </button>
 
@@ -189,11 +172,11 @@ export default function Projects() {
                       <motion.ul
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
-                        className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mt-4 pl-1"
+                        className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 pl-1"
                       >
                         {p.features.map((f) => (
-                          <li key={f} className="flex items-start gap-2.5 text-xs sm:text-sm text-text-secondary leading-relaxed">
-                            <div className="w-1.5 h-1.5 mt-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: p.accentColor, boxShadow: `0 0 6px ${p.accentColor}80` }} />
+                          <li key={f} className="flex items-start gap-2 text-[11px] sm:text-xs text-text-muted leading-relaxed">
+                            <div className="w-1 h-1 mt-1.5 rounded-full flex-shrink-0 opacity-60" style={{ backgroundColor: p.accentColor }} />
                             {f}
                           </li>
                         ))}
@@ -201,25 +184,37 @@ export default function Projects() {
                     )}
                   </div>
 
-                  <div className="flex flex-wrap gap-3">
+                  {/* Action buttons */}
+                  <div className="flex flex-wrap gap-2.5">
+                    {p.liveUrl ? (
+                      <a
+                        href={p.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-1.5 px-5 py-2.5 sm:px-6 sm:py-3 text-[11px] sm:text-xs font-bold text-white rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                        style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}cc)` }}
+                      >
+                        <ExternalLink size={13} className="group-hover:rotate-12 transition-transform duration-300" />
+                        View Live
+                        <ArrowRight size={12} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                      </a>
+                    ) : (
+                      <a
+                        href="#contact"
+                        onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                        className="group inline-flex items-center gap-1.5 px-5 py-2.5 sm:px-6 sm:py-3 text-[11px] sm:text-xs font-bold text-white rounded-full transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                        style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}cc)` }}
+                      >
+                        <ExternalLink size={13} />
+                        Request Demo
+                      </a>
+                    )}
                     <a
                       href="#contact"
                       onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 lg:px-7 lg:py-3.5 text-xs sm:text-sm lg:text-[15px] xl:text-base font-semibold text-white rounded-full transition-all duration-300"
-                      style={{ background: `linear-gradient(135deg, ${p.accentColor}, ${p.accentColor}cc)`, boxShadow: `0 0 0 rgba(0,0,0,0)` }}
-                      onMouseEnter={(e) => (e.currentTarget.style.boxShadow = `0 0 25px ${p.accentColor}40`)}
-                      onMouseLeave={(e) => (e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`)}
+                      className="group inline-flex items-center gap-1.5 px-5 py-2.5 sm:px-6 sm:py-3 text-[11px] sm:text-xs font-semibold rounded-full border border-white/10 bg-white/[0.03] text-text-muted hover:text-text-secondary hover:border-white/16 hover:-translate-y-0.5 transition-all duration-300"
                     >
-                      <ExternalLink size={15} />
-                      View Live
-                      <ArrowRight size={14} />
-                    </a>
-                    <a
-                      href="#contact"
-                      onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 lg:px-7 lg:py-3.5 glass-card text-text-secondary hover:text-text-primary text-xs sm:text-sm lg:text-[15px] xl:text-base font-semibold rounded-full hover:!border-primary/30 transition-all duration-300"
-                    >
-                      <Github size={15} />
+                      <Github size={13} />
                       Source Code
                     </a>
                   </div>
@@ -234,18 +229,18 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center mt-10 sm:mt-14"
+          className="text-center mt-12 sm:mt-14"
         >
-          <p className="text-text-muted text-sm sm:text-base mb-4">
+          <p className="text-text-muted text-xs sm:text-sm mb-4">
             Interested in seeing more or discussing a custom project?
           </p>
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-2 px-8 py-4 sm:px-9 sm:py-4.5 bg-gradient-to-r from-primary to-primary-dark text-[#1a1a1a] text-base sm:text-lg font-semibold rounded-full border-2 border-primary/50 transition-all duration-300 hover:shadow-[0_0_35px_rgba(0,255,204,0.4)] hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-primary to-primary-dark text-[#0f0f0f] text-sm sm:text-base font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,255,204,0.3)] hover:-translate-y-0.5"
           >
             Let's Discuss Your Project
-            <ArrowRight size={16} className="text-[#1a1a1a]" />
+            <ArrowRight size={15} />
           </a>
         </motion.div>
       </div>

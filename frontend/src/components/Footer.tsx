@@ -5,7 +5,7 @@ const socialLinks = [
   { icon: InstagramIcon, href: 'https://www.instagram.com/oussama.hitte?utm_source=qr&igsh=MTQ1MG92MWU3MzN6NA==', label: 'Instagram' },
   { icon: FacebookIcon, href: 'https://www.facebook.com/ipm.kira', label: 'Facebook' },
   { icon: WhatsAppIcon, href: 'https://wa.me/212659404133', label: 'WhatsApp' },
-  { icon: () => <Mail size={18} />, href: 'mailto:oussamahitte6@gmail.com', label: 'Email' },
+  { icon: () => <Mail size={16} />, href: 'mailto:oussamahitte6@gmail.com', label: 'Email' },
 ];
 
 const footerLinks = [
@@ -24,34 +24,31 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-dark-lighter/50 backdrop-blur-xl border-t border-border">
-      {/* Subtle aura glow at top of footer */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-
+    <footer className="relative bg-[#0a0a0a] border-t border-white/[0.04]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-10 sm:py-12 md:py-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
+        <div className="py-10 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
           {/* Brand */}
           <div>
-            <a href="#home" onClick={(e) => { e.preventDefault(); handleClick('#home'); }} className="font-heading text-xl sm:text-2xl font-bold tracking-tight inline-block mb-3 sm:mb-4 ml-1">
+            <a href="#home" onClick={(e) => { e.preventDefault(); handleClick('#home'); }} className="font-heading text-lg font-bold tracking-tight inline-block mb-3">
               <span className="bg-gradient-to-r from-primary-light to-accent bg-clip-text text-transparent">O</span>
               <span className="text-text-primary">H</span>
-              <span className="bg-gradient-to-r from-accent to-primary-light bg-clip-text text-transparent">.</span>
+              <span className="text-text-muted">.</span>
             </a>
-            <p className="text-text-muted text-xs sm:text-sm leading-relaxed max-w-[280px]">
+            <p className="text-text-muted text-xs leading-relaxed max-w-[260px]">
               Oussama Hitte — Full Stack Developer building modern web apps, gaming platforms, and AI solutions.
             </p>
           </div>
 
-          {/* Navigation links */}
+          {/* Navigation */}
           <div>
-            <h4 className="font-heading text-sm sm:text-base font-semibold text-text-primary mb-3 sm:mb-4">Links</h4>
-            <ul className="space-y-2 sm:space-y-2.5">
+            <h4 className="font-heading text-xs font-semibold text-text-secondary mb-3 uppercase tracking-wider">Links</h4>
+            <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); handleClick(link.href); }}
-                    className="text-text-muted text-xs sm:text-sm hover:text-primary-light transition-colors py-0.5 inline-block"
+                    className="text-text-muted text-xs hover:text-primary-light/70 transition-colors py-0.5 inline-block"
                   >
                     {link.name}
                   </a>
@@ -60,10 +57,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social links */}
+          {/* Social */}
           <div>
-            <h4 className="font-heading text-sm sm:text-base font-semibold text-text-primary mb-3 sm:mb-4">Connect</h4>
-            <div className="flex gap-2.5 sm:gap-3">
+            <h4 className="font-heading text-xs font-semibold text-text-secondary mb-3 uppercase tracking-wider">Connect</h4>
+            <div className="flex gap-2.5">
               {socialLinks.map((s) => (
                 <a
                   key={s.label}
@@ -71,7 +68,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl glass-card flex items-center justify-center text-text-muted hover:text-primary-light hover:shadow-[0_0_12px_rgba(0,255,204,0.15)] transition-all duration-300"
+                  className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-text-muted hover:text-primary-light/70 hover:border-white/10 transition-all duration-300"
                 >
                   <s.icon />
                 </a>
@@ -80,16 +77,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="py-5 sm:py-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-text-muted text-[11px] sm:text-xs flex items-center gap-1">
+        <div className="py-5 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-text-muted text-[10px] sm:text-[11px] flex items-center gap-1">
             &copy; {year} Oussama Hitte. Made with{' '}
-            <Heart size={12} className="text-rose fill-rose" /> and code.
+            <Heart size={10} className="text-rose fill-rose" /> and code.
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-text-muted text-[11px] sm:text-xs hover:text-primary-light transition-colors py-1 px-2"
+            className="text-text-muted text-[10px] sm:text-[11px] hover:text-primary-light/60 transition-colors py-1 px-2"
           >
-            Back to top
+            Back to top ↑
           </button>
         </div>
       </div>

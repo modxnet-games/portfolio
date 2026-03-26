@@ -10,7 +10,7 @@ import ChatWidget from './components/ChatWidget';
 
 function App() {
   return (
-    <div className="min-h-screen bg-dark relative">
+    <div className="min-h-screen bg-[#0f0f0f] relative">
       <AuraBackground />
       <div className="relative z-10">
         <Navbar />

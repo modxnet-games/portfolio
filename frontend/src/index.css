@@ -9,21 +9,21 @@
   --color-accent-light: #22d3ee;
   --color-emerald: #10b981;
   --color-rose: #f43f5e;
-  --color-dark: #1a1a1a;
-  --color-dark-lighter: #242424;
-  --color-dark-card: rgba(26, 26, 26, 0.65);
-  --color-surface: rgba(38, 38, 38, 0.45);
-  --color-glass: rgba(26, 26, 26, 0.5);
-  --color-text-primary: #f5f5ff;
-  --color-text-secondary: #b8b8d4;
-  --color-text-muted: #7a7a9e;
-  --color-border: rgba(0, 255, 204, 0.1);
-  --color-border-light: rgba(0, 255, 204, 0.18);
-  --color-aura-1: rgba(0, 255, 204, 0.18);
-  --color-aura-2: rgba(6, 182, 212, 0.14);
-  --color-aura-3: rgba(244, 63, 94, 0.1);
-  --font-sans: 'Sora', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Space Grotesk', 'Sora', system-ui, sans-serif;
+  --color-dark: #0f0f0f;
+  --color-dark-lighter: #1a1a1a;
+  --color-dark-card: rgba(22, 22, 22, 0.65);
+  --color-surface: rgba(32, 32, 32, 0.5);
+  --color-glass: rgba(22, 22, 22, 0.55);
+  --color-text-primary: #f0f0f8;
+  --color-text-secondary: #a8a8c0;
+  --color-text-muted: #6a6a86;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-light: rgba(255, 255, 255, 0.1);
+  --color-aura-1: rgba(0, 255, 204, 0.08);
+  --color-aura-2: rgba(6, 182, 212, 0.06);
+  --color-aura-3: rgba(244, 63, 94, 0.04);
+  --font-sans: 'Inter', 'Sora', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --font-mono: 'Fira Code', 'Cascadia Code', monospace;
 }
 
@@ -35,7 +35,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -45,19 +45,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 ::selection {
-  background-color: var(--color-primary);
+  background-color: rgba(0, 255, 204, 0.25);
   color: white;
 }
 
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--color-dark); }
-::-webkit-scrollbar-thumb { background: rgba(0, 255, 204, 0.35); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 204, 0.5); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
 
-/* ── Chat Widget: SaaS-style message layout ───────────────────── */
+/* ── Chat Widget ───────────────────── */
 .chat-messages {
   display: flex;
   flex-direction: column;
@@ -80,12 +82,12 @@ body {
   line-height: 1.6;
 }
 .chat-bubble-user {
-  box-shadow: 0 2px 12px rgba(0, 255, 204, 0.2);
-  border: 2px solid rgba(0, 255, 204, 0.35);
+  box-shadow: 0 2px 12px rgba(0, 255, 204, 0.15);
+  border: 1px solid rgba(0, 255, 204, 0.2);
 }
 .chat-bubble-assistant {
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 255, 204, 0.12);
-  border: 2px solid rgba(0, 255, 204, 0.15);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 .chat-message-content {
   word-wrap: break-word;
@@ -106,7 +108,6 @@ body {
 .chat-message-content li {
   line-height: 1.55;
 }
-/* Desktop: center content, improve readability */
 @media (min-width: 1024px) {
   .chat-messages {
     max-width: 100%;
@@ -123,15 +124,7 @@ body {
   }
 }
 
-/* ── Mobile: OH logo spacing (max-width: 768px) ───────────────────────── */
-@media (max-width: 768px) {
-  nav a[href="#home"].font-heading {
-    margin-left: 12px !important;
-    padding-left: 6px !important;
-  }
-}
-
-/* ── Mobile Chat: keyboard-safe layout (max-width: 768px) ─────────────── */
+/* ── Mobile Chat ─────────────── */
 @media (max-width: 768px) {
   .chat-panel.chat-container {
     height: 100dvh !important;
@@ -165,10 +158,10 @@ body {
     flex-shrink: 0 !important;
     padding: 10px 16px !important;
     padding-bottom: max(10px, env(safe-area-inset-bottom)) !important;
-    background: rgba(26, 26, 26, 0.92) !important;
+    background: rgba(15, 15, 15, 0.95) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    border-top: 1px solid rgba(0, 255, 204, 0.12) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
   }
   .chat-input-area.chat-input .flex.items-center.gap-2 {
     gap: 0.5rem !important;
@@ -186,50 +179,35 @@ body {
   }
 }
 
-/* Hero: "Open to new opportunities" badge - spacing below profile picture */
-.hero-opportunities-badge {
-  margin-top: 1rem;
-}
-@media (max-width: 1023px) {
-  .hero-opportunities-badge {
-    margin-top: 2rem !important;
-  }
-}
-
-/* ── Aura Animations ────────────────────────────────── */
+/* ── Animations ────────────────────────────────── */
 @keyframes scroll-left {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 @keyframes aurora-drift {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-  25% { transform: translate(30px, -40px) scale(1.1); opacity: 0.7; }
-  50% { transform: translate(-20px, 20px) scale(0.95); opacity: 0.4; }
-  75% { transform: translate(40px, 30px) scale(1.05); opacity: 0.6; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
+  25% { transform: translate(30px, -40px) scale(1.1); opacity: 0.5; }
+  50% { transform: translate(-20px, 20px) scale(0.95); opacity: 0.3; }
+  75% { transform: translate(40px, 30px) scale(1.05); opacity: 0.45; }
 }
 
 @keyframes aurora-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-  33% { transform: translate(-40px, 30px) scale(1.15); opacity: 0.6; }
-  66% { transform: translate(30px, -20px) scale(0.9); opacity: 0.3; }
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  33% { transform: translate(-40px, 30px) scale(1.15); opacity: 0.45; }
+  66% { transform: translate(30px, -20px) scale(0.9); opacity: 0.2; }
 }
 
 @keyframes aurora-drift-3 {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
-  50% { transform: translate(20px, -30px) rotate(5deg); opacity: 0.5; }
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.2; }
+  50% { transform: translate(20px, -30px) rotate(5deg); opacity: 0.35; }
 }
 
 @keyframes float-particle {
   0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
   100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
-}
-
-@keyframes glow-breathe {
-  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 204, 0.0), inset 0 0 20px rgba(0, 255, 204, 0.0); }
-  50% { box-shadow: 0 0 30px rgba(0, 255, 204, 0.12), inset 0 0 30px rgba(0, 255, 204, 0.04); }
 }
 
 @keyframes gradient-shift {
@@ -239,87 +217,127 @@ body {
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-@keyframes corner-pulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.3); }
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
 }
 
 /* ── Glass Card ─────────────────────────────────────── */
 .glass-card {
-  background: rgba(26, 26, 26, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 255, 204, 0.1);
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: rgba(22, 22, 22, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1rem;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(0, 255, 204, 0.22);
-  box-shadow:
-    0 0 30px rgba(0, 255, 204, 0.1),
-    0 8px 32px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
 }
-/* Card stroke colors per section */
-#home .glass-card { border-color: rgba(0, 255, 204, 0.12); }
-#home .glass-card:hover { border-color: rgba(0, 255, 204, 0.24); }
-#about .glass-card { border-color: rgba(6, 182, 212, 0.14); }
-#about .glass-card:hover { border-color: rgba(6, 182, 212, 0.28); }
-#skills .glass-card { border-color: rgba(16, 185, 129, 0.14); }
-#skills .glass-card:hover { border-color: rgba(16, 185, 129, 0.28); }
-#projects .glass-card { border-color: rgba(168, 85, 247, 0.14); }
-#projects .glass-card:hover { border-color: rgba(168, 85, 247, 0.28); }
-#contact .glass-card { border-color: rgba(244, 63, 94, 0.12); }
-#contact .glass-card:hover { border-color: rgba(244, 63, 94, 0.24); }
 
-/* ── Aura Glow Border ───────────────────────────────── */
-.aura-border {
+/* ── Section Stroke Container ──────────────────────── */
+.section-stroke {
   position: relative;
+  border-radius: 1.25rem;
+  background: rgba(18, 18, 18, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid transparent;
 }
 
-.aura-border::before {
-  content: '';
+/* Animated conic gradient stroke line */
+.section-stroke .stroke-line {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 255, 204, 0.35),
-    rgba(6, 182, 212, 0.2),
-    rgba(244, 63, 94, 0.15),
-    rgba(0, 255, 204, 0.3)
-  );
-  background-size: 300% 300%;
-  animation: gradient-shift 8s ease infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  opacity: 0;
-  transition: opacity 0.4s;
   pointer-events: none;
+  z-index: 1;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(0, 255, 204, 0.25) 10%,
+    transparent 20%,
+    transparent 50%,
+    rgba(6, 182, 212, 0.2) 60%,
+    transparent 70%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: stroke-rotate 8s linear infinite;
 }
 
-.aura-border:hover::before {
-  opacity: 1;
+@keyframes stroke-rotate {
+  0% { background: conic-gradient(from 0deg, transparent 0%, rgba(0,255,204,0.25) 10%, transparent 20%, transparent 50%, rgba(6,182,212,0.2) 60%, transparent 70%, transparent 100%); }
+  25% { background: conic-gradient(from 90deg, transparent 0%, rgba(0,255,204,0.25) 10%, transparent 20%, transparent 50%, rgba(6,182,212,0.2) 60%, transparent 70%, transparent 100%); }
+  50% { background: conic-gradient(from 180deg, transparent 0%, rgba(0,255,204,0.25) 10%, transparent 20%, transparent 50%, rgba(6,182,212,0.2) 60%, transparent 70%, transparent 100%); }
+  75% { background: conic-gradient(from 270deg, transparent 0%, rgba(0,255,204,0.25) 10%, transparent 20%, transparent 50%, rgba(6,182,212,0.2) 60%, transparent 70%, transparent 100%); }
+  100% { background: conic-gradient(from 360deg, transparent 0%, rgba(0,255,204,0.25) 10%, transparent 20%, transparent 50%, rgba(6,182,212,0.2) 60%, transparent 70%, transparent 100%); }
 }
 
-/* ── Mobile Layout (max-width: 1023px) ──────────────────────────── */
+/* Corner accent dots */
+.section-stroke .corner-accent {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 255, 204, 0.35);
+  z-index: 2;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+.section-stroke .corner-tl { top: -2px; left: -2px; }
+.section-stroke .corner-tr { top: -2px; right: -2px; }
+.section-stroke .corner-bl { bottom: -2px; left: -2px; }
+.section-stroke .corner-br { bottom: -2px; right: -2px; }
+.section-stroke .corner-tl { animation-delay: 0s; }
+.section-stroke .corner-tr { animation-delay: 0.75s; }
+.section-stroke .corner-bl { animation-delay: 1.5s; }
+.section-stroke .corner-br { animation-delay: 2.25s; }
+
+/* Hide old edge-glow elements if any remain */
+.section-stroke .edge-glow-top,
+.section-stroke .edge-glow-bottom {
+  display: none !important;
+}
+
+/* ── Section Divider ────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+/* ── Aura Border (simplified) ───────────────────────── */
+.aura-border {
+  position: relative;
+}
+.aura-border::before {
+  display: none;
+}
+
+/* ── Hero opportunities badge ────────────────────── */
+.hero-opportunities-badge {
+  margin-top: 1.25rem;
+}
+@media (max-width: 1023px) {
+  .hero-opportunities-badge {
+    margin-top: 1.5rem !important;
+  }
+}
+
+/* ── Mobile Layout (max-width: 1023px) ──────────────── */
 @media (max-width: 1023px) {
   main {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
   }
-  #home,
-  #about,
-  #skills,
-  #projects,
-  #contact {
+  #home, #about, #skills, #projects, #contact {
     width: 100%;
     max-width: 100%;
   }
@@ -332,13 +350,9 @@ body {
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
-  .section-stroke {
-    max-width: 100%;
-  }
-  /* Reset desktop transforms - prevent content shifting off-screen on mobile */
   #home .hero-profile-block,
   #home .hero-text-block {
     transform: none !important;
@@ -347,28 +361,19 @@ body {
     left: auto !important;
     right: auto !important;
   }
-  /* Prevent decorative blurs from causing horizontal overflow */
-  #skills,
-  #contact {
+  #skills, #contact {
     overflow-x: hidden;
   }
 }
 
-/* ── Mobile: phones (max-width: 768px) ──────────────────────────── */
+/* ── Mobile: phones (max-width: 768px) ──────────────── */
 @media (max-width: 768px) {
-  body,
-  main,
-  section,
-  #home,
-  #about,
-  #skills,
-  #projects,
-  #contact {
+  body, main, section,
+  #home, #about, #skills, #projects, #contact {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden;
   }
-  /* Hero: ensure profile image is visible and centered */
   #home .hero-profile-block {
     display: flex !important;
     flex-direction: column !important;
@@ -380,11 +385,10 @@ body {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    max-width: min(192px, 85vw) !important;
+    max-width: min(180px, 75vw) !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
-  /* CTA buttons: prevent overflow on mobile */
   #home .hero-text-block a[href="#projects"],
   #home .hero-text-block a[href="#contact"],
   #projects .mt-10 a[href="#contact"],
@@ -394,15 +398,17 @@ body {
     max-width: 100% !important;
     box-sizing: border-box !important;
   }
-  /* Prevent text/buttons from overflowing */
   #home .hero-text-block,
   #home .hero-profile-block,
   .section-stroke {
     min-width: 0 !important;
   }
+  nav a[href="#home"].font-heading {
+    margin-left: 8px !important;
+  }
 }
 
-/* Force single-column grids on small screens (under 768px) */
+/* Force single-column on small screens */
 @media (max-width: 767px) {
   #about .section-stroke .grid,
   #skills .section-stroke .grid,
@@ -413,250 +419,65 @@ body {
   }
 }
 
-/* ── Section Divider ────────────────────────────────── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.22), rgba(6, 182, 212, 0.16), transparent);
-}
-
-/* ── Animated Section Stroke Outline ────────────────── */
-@property --stroke-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.section-stroke {
-  position: relative;
-  border-radius: 1.5rem;
-  background: rgba(26, 26, 26, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-/* Static subtle border visible at all times - different per section */
-.section-stroke::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 1px solid rgba(6, 182, 212, 0.25);
-  pointer-events: none;
-}
-#home .section-stroke::after { border-color: rgba(0, 255, 204, 0.25); }
-#about .section-stroke::after { border-color: rgba(6, 182, 212, 0.25); }
-#skills .section-stroke::after { border-color: rgba(16, 185, 129, 0.25); }
-#projects .section-stroke::after { border-color: rgba(168, 85, 247, 0.25); }
-#contact .section-stroke::after { border-color: rgba(244, 63, 94, 0.22); }
-
-/* Animated conic-gradient stroke */
-.section-stroke::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: conic-gradient(
-    from var(--stroke-angle),
-    transparent 0%,
-    rgba(6, 182, 212, 0.5) 8%,
-    rgba(34, 211, 238, 0.45) 16%,
-    rgba(6, 182, 212, 0.3) 22%,
-    transparent 30%,
-    transparent 50%,
-    rgba(34, 211, 238, 0.25) 56%,
-    transparent 62%,
-    transparent 75%,
-    rgba(6, 182, 212, 0.4) 82%,
-    rgba(16, 185, 129, 0.25) 88%,
-    transparent 95%
-  );
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  pointer-events: none;
-  animation: stroke-rotate 6s linear infinite;
-  z-index: 1;
-}
-
-@keyframes stroke-rotate {
-  to { --stroke-angle: 360deg; }
-}
-
-/* Corner accents for section stroke */
-.section-stroke .corner-accent {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.section-stroke .corner-accent::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: rgba(0, 255, 204, 0.6);
-  box-shadow: 0 0 10px 2px rgba(0, 255, 204, 0.4), 0 0 20px 4px rgba(0, 255, 204, 0.15);
-  animation: corner-pulse 3s ease-in-out infinite;
-}
-
-.section-stroke .corner-tl { top: -3px; left: -3px; }
-.section-stroke .corner-tl::before { background: rgba(6, 182, 212, 0.6); box-shadow: 0 0 10px 2px rgba(6,182,212,0.4), 0 0 20px 4px rgba(6,182,212,0.15); }
-.section-stroke .corner-tr { top: -3px; right: -3px; }
-.section-stroke .corner-tr::before { animation-delay: 0.75s; background: rgba(34, 211, 238, 0.6); box-shadow: 0 0 10px 2px rgba(34,211,238,0.4), 0 0 20px 4px rgba(34,211,238,0.15); }
-.section-stroke .corner-bl { bottom: -3px; left: -3px; }
-.section-stroke .corner-bl::before { animation-delay: 1.5s; background: rgba(6, 182, 212, 0.5); box-shadow: 0 0 10px 2px rgba(6,182,212,0.35), 0 0 20px 4px rgba(6,182,212,0.12); }
-.section-stroke .corner-br { bottom: -3px; right: -3px; }
-.section-stroke .corner-br::before { animation-delay: 2.25s; background: rgba(16, 185, 129, 0.5); box-shadow: 0 0 10px 2px rgba(16,185,129,0.35), 0 0 20px 4px rgba(16,185,129,0.12); }
-
-/* Edge glow lines along the border */
-.section-stroke .edge-glow-top,
-.section-stroke .edge-glow-bottom {
-  position: absolute;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.section-stroke .edge-glow-top {
-  top: 0;
-  background: linear-gradient(90deg, transparent, rgba(6,182,212,0.45), rgba(34,211,238,0.35), transparent);
-  animation: glow-pulse 4s ease-in-out infinite;
-}
-
-.section-stroke .edge-glow-bottom {
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(34,211,238,0.35), rgba(6,182,212,0.45), transparent);
-  animation: glow-pulse 4s ease-in-out infinite 2s;
-}
-
-/* ── Desktop Layout (min-width: 1024px) ───────────────────────────── */
+/* ── Desktop Layout (min-width: 1024px) ───────────────── */
 @media (min-width: 1024px) {
-  /* ═══ Section stroke: more visible boundary ═══ */
-  #home .section-stroke,
-  #about .section-stroke,
-  #skills .section-stroke,
-  #projects .section-stroke,
-  #contact .section-stroke {
-    background: rgba(26, 26, 26, 0.7);
-    box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.22), inset 0 1px 0 0 rgba(255, 255, 255, 0.02);
-  }
-  #home .section-stroke::after { border-width: 1px; border-color: rgba(0, 255, 204, 0.28); }
-  #about .section-stroke::after { border-width: 1px; border-color: rgba(6, 182, 212, 0.28); }
-  #skills .section-stroke::after { border-width: 1px; border-color: rgba(16, 185, 129, 0.28); }
-  #projects .section-stroke::after { border-width: 1px; border-color: rgba(168, 85, 247, 0.28); }
-  #contact .section-stroke::after { border-width: 1px; border-color: rgba(244, 63, 94, 0.25); }
-
-  /* Card boundaries: different stroke per section */
-  #about .glass-card {
-    border-color: rgba(6, 182, 212, 0.22);
-    background: rgba(26, 26, 26, 0.65);
-  }
-  #skills .glass-card {
-    border-color: rgba(16, 185, 129, 0.22);
-    background: rgba(26, 26, 26, 0.65);
-  }
-  #projects .glass-card {
-    border-color: rgba(168, 85, 247, 0.22);
-    background: rgba(26, 26, 26, 0.65);
-  }
-  #contact .glass-card {
-    border-color: rgba(244, 63, 94, 0.2);
-    background: rgba(26, 26, 26, 0.65);
-  }
-
-  /* 4) Internal spacing: consistent rhythm */
-  #about .section-stroke > div > .grid:first-of-type {
-    gap: 1.5rem 1.75rem;
-  }
-  #about .section-stroke > div > .grid:last-of-type {
-    margin-top: 2.5rem;
-    gap: 1.5rem 1.75rem;
-  }
-  #skills .section-stroke .grid[class*="grid-cols"] {
-    gap: 1.5rem 1.75rem;
-  }
-  #projects .space-y-5,
-  #projects .space-y-6,
-  #projects .space-y-8 {
-    gap: 2rem;
-  }
-
-  /* 5) Section header to content spacing */
-  #about .text-center:has(h2),
-  #skills .text-center:has(h2),
-  #projects .text-center:has(h2),
-  #contact .text-center:has(h2) {
-    margin-bottom: 2.5rem;
-  }
-
-  /* 6) Paragraph spacing within cards */
-  #about .glass-card p,
-  #skills .glass-card p {
-    line-height: 1.65;
-  }
-
-  /* ═══ Original desktop layout rules ═══ */
-
-  /* 1) Centered main container */
+  /* Container width */
   #home .max-w-7xl,
   #about .max-w-7xl,
   #skills .max-w-7xl,
   #projects .max-w-7xl,
   #contact .max-w-7xl {
-    max-width: 1150px !important;
+    max-width: 1100px !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  /* 2) Hero: reduce profile image so it doesn't dominate */
+  /* Cards on desktop */
+  #about .glass-card,
+  #skills .glass-card,
+  #projects .glass-card,
+  #contact .glass-card {
+    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(22, 22, 22, 0.7);
+  }
+
+  /* Hero: profile image size */
   #home div.rounded-full.overflow-hidden:has(img[alt="Oussama Hitte"]) {
-    max-width: 260px !important;
-    width: 260px !important;
-    height: 260px !important;
+    max-width: 240px !important;
+    width: 240px !important;
+    height: 240px !important;
   }
-  /* Hero profile wrapper: match 260px on desktop so badges align with image */
   #home .hero-profile-wrapper {
-    width: 260px !important;
-    height: 260px !important;
+    width: 240px !important;
+    height: 240px !important;
   }
-  /* Profile block (picture + badges): shift left on desktop */
   #home .hero-profile-block {
-    transform: translateX(-32px);
+    transform: translateX(-16px);
   }
-  /* 5+ Years badge: same as mobile (position, padding, font) */
   #home .badge-5years {
     bottom: -4px !important;
     right: -4px !important;
-    padding: 6px 12px !important;
+    padding: 5px 10px !important;
   }
   #home .badge-5years span {
-    font-size: 11px !important;
+    font-size: 10px !important;
+  }
+  #home .hero-text-block {
+    transform: translateX(12px);
   }
 
-  /* Hero text blocks: shift right on desktop */
-  #home .hero-text-block {
-    transform: translateX(28px);
-  }
-  /* 3) Typography: reduce heading sizes, improve readability */
+  /* Typography */
   #home h1 {
-    font-size: clamp(2rem, 3.5vw, 3.25rem) !important;
+    font-size: clamp(1.85rem, 3.2vw, 3rem) !important;
     line-height: 1.15 !important;
   }
-  #about h2,
-  #skills h2,
-  #projects h2,
-  #contact h2 {
-    font-size: clamp(1.75rem, 2.5vw, 2.5rem) !important;
+  #about h2, #skills h2, #projects h2, #contact h2 {
+    font-size: clamp(1.6rem, 2.2vw, 2.25rem) !important;
     line-height: 1.2 !important;
     margin-bottom: 0.75rem !important;
   }
-  /* Section intro paragraphs: keep centered like mobile */
+
+  /* Section headers centered */
   #about .text-center:has(h2),
   #skills .text-center:has(h2),
   #projects .text-center:has(h2),
@@ -665,116 +486,130 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2rem;
   }
   #about .text-center:has(h2) p,
   #skills .text-center:has(h2) p,
   #projects .text-center:has(h2) p,
   #contact .text-center:has(h2) p {
-    max-width: 48ch !important;
+    max-width: 44ch !important;
     margin-left: auto !important;
     margin-right: auto !important;
     line-height: 1.7;
     text-align: center;
   }
-  /* Hero bio: keep left-aligned (only this paragraph stays left) */
+
+  /* Hero bio left-aligned */
   #home p.text-text-secondary {
-    max-width: 42ch;
+    max-width: 40ch;
     margin-left: 0;
     margin-right: auto;
     line-height: 1.7;
   }
 
-  /* 4) Skills: 2-column grid */
+  /* Skills grid */
   #skills .grid[class*="grid-cols"] {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem 1.5rem;
+    gap: 1rem 1.25rem;
   }
 
-  /* 5) Projects: 2-column grid */
-  #projects .space-y-5,
-  #projects .space-y-6,
-  #projects .space-y-8 {
+  /* Projects grid */
+  #projects .projects-grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
-  #projects .space-y-5 > *,
-  #projects .space-y-6 > *,
-  #projects .space-y-8 > * {
+  #projects .projects-grid > * {
     margin-top: 0 !important;
   }
 
-  /* 6) Contact: balanced 2-column layout */
+  /* Contact: 2-column */
   #contact .grid {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   #contact .grid > * {
     grid-column: span 1;
   }
 
-  /* 7) Contact form inputs: professional dark UI styling */
+  /* Contact form styling */
   #contact form input,
   #contact form textarea {
-    border-radius: 13px !important;
-    border: 1px solid rgba(0, 255, 204, 0.2) !important;
-    background: rgba(26, 26, 26, 0.7) !important;
-    padding: 0.875rem 1.125rem !important;
-    min-height: 48px;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(18, 18, 18, 0.8) !important;
+    padding: 0.75rem 1rem !important;
+    min-height: 44px;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
   }
   #contact form input:hover,
   #contact form textarea:hover {
-    border-color: rgba(0, 255, 204, 0.35) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
   }
   #contact form input:focus,
   #contact form textarea:focus {
     outline: none !important;
-    border-color: rgba(0, 255, 204, 0.6) !important;
-    box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.2), 0 0 16px rgba(0, 255, 204, 0.08) !important;
+    border-color: rgba(0, 255, 204, 0.4) !important;
+    box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.1) !important;
   }
   #contact form textarea {
-    min-height: 140px;
-    padding: 1rem 1.125rem !important;
+    min-height: 130px;
+    padding: 0.875rem 1rem !important;
   }
   #contact form label {
-    color: rgba(240, 240, 255, 0.9) !important;
-    font-weight: 600;
+    color: rgba(220, 220, 240, 0.85) !important;
+    font-weight: 500;
+    font-size: 0.8125rem;
   }
   #contact form input::placeholder,
   #contact form textarea::placeholder {
-    color: rgba(160, 160, 192, 0.7) !important;
+    color: rgba(140, 140, 170, 0.5) !important;
   }
   #contact form .grid[class*="grid-cols"] {
-    gap: 1.25rem 1.5rem;
-    margin-bottom: 1.25rem !important;
+    gap: 1rem 1.25rem;
+    margin-bottom: 1rem !important;
   }
-  #contact form .mb-4 {
-    margin-bottom: 1.25rem !important;
+  #contact form .mb-4 { margin-bottom: 1rem !important; }
+  #contact form .mb-6 { margin-bottom: 1.25rem !important; }
+
+  /* About section spacing */
+  #about .section-stroke > div > .grid:first-of-type {
+    gap: 1.25rem;
   }
-  #contact form .mb-6 {
-    margin-bottom: 1.5rem !important;
+  #about .section-stroke > div > .grid:last-of-type {
+    margin-top: 2rem;
+    gap: 1.25rem;
+  }
+  #skills .section-stroke .grid[class*="grid-cols"] {
+    gap: 1rem 1.25rem;
+  }
+
+  /* Card text readability */
+  #about .glass-card p,
+  #skills .glass-card p {
+    line-height: 1.65;
+    font-size: 0.8125rem;
   }
 }
 
-/* Contact form: clarity & borders (all screens) */
+/* Contact form: all screens */
 #contact form input,
 #contact form textarea {
   border-radius: 12px;
-  border: 1px solid rgba(0, 255, 204, 0.18);
-  background: rgba(26, 26, 26, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(18, 18, 18, 0.8);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 #contact form input:focus,
 #contact form textarea:focus {
   outline: none;
-  border-color: rgba(0, 255, 204, 0.5);
-  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.15);
+  border-color: rgba(0, 255, 204, 0.35);
+  box-shadow: 0 0 0 1px rgba(0, 255, 204, 0.1);
 }
 #contact form label {
-  color: rgba(200, 200, 225, 0.95);
+  color: rgba(200, 200, 225, 0.85);
 }
 #contact form input::placeholder,
 #contact form textarea::placeholder {
-  color: rgba(160, 160, 192, 0.75);
+  color: rgba(140, 140, 170, 0.45);
 }

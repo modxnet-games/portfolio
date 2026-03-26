@@ -48,92 +48,75 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="skills" className="py-16 sm:py-20 md:py-24 lg:py-28 relative">
-      <div className="section-divider" />
-
-      <div className="absolute top-1/3 -left-40 w-60 sm:w-80 h-60 sm:h-80 bg-accent/8 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-40 w-60 sm:w-80 h-60 sm:h-80 bg-primary/8 rounded-full blur-[100px] sm:blur-[150px] pointer-events-none" />
-
+    <section id="skills" className="py-20 sm:py-24 md:py-28 lg:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10 sm:mb-12 md:mb-14"
+          className="text-center mb-12 sm:mb-14 md:mb-16"
         >
-          <span className="font-mono text-xs sm:text-sm lg:text-[15px] font-medium text-primary-light tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(0,255,204,0.4)]">
+          <span className="font-mono text-[11px] sm:text-xs font-medium text-primary-light/70 tracking-[0.2em] uppercase">
             Skills
           </span>
-          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] xl:text-[2.75rem] font-bold mt-3 mb-4">
+          <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-[2.25rem] font-bold mt-3 mb-4">
             Technologies &{' '}
             <span className="bg-gradient-to-r from-primary via-accent to-primary-light bg-clip-text text-transparent bg-[length:200%_200%] animate-[gradient-shift_6s_ease_infinite]">
               Expertise
             </span>
           </h2>
-          <p className="text-text-secondary text-sm sm:text-base md:text-lg lg:text-[17px] max-w-xl mx-auto">
+          <p className="text-text-secondary text-sm sm:text-[15px] md:text-base max-w-md mx-auto leading-relaxed">
             A toolkit built through real project experience across web, mobile, and AI.
           </p>
         </motion.div>
 
-        <SectionStroke className="p-5 sm:p-7 md:p-8 lg:p-10" delay={0.15}>
+        <SectionStroke className="p-6 sm:p-8 md:p-10 lg:p-12" delay={0.15}>
           {/* Scrolling tech logos */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mb-8 sm:mb-10 md:mb-12 overflow-hidden relative"
+            className="mb-8 sm:mb-10 overflow-hidden relative"
           >
-            <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-dark to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-dark to-transparent z-10 pointer-events-none" />
-            <div className="flex gap-3 sm:gap-4 animate-[scroll-left_25s_linear_infinite] w-max">
+            <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none" />
+            <div className="flex gap-3 animate-[scroll-left_30s_linear_infinite] w-max">
               {[...techStack, ...techStack].map((t, i) => (
                 <div
                   key={`${t.name}-${i}`}
-                  className="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 glass-card rounded-full whitespace-nowrap hover:shadow-[0_0_15px_rgba(0,255,204,0.12)] transition-shadow"
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/[0.03] border border-white/[0.05] whitespace-nowrap transition-colors hover:border-white/10"
                 >
                   <div
-                    className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: t.color, boxShadow: `0 0 8px ${t.color}50` }}
+                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: t.color, boxShadow: `0 0 6px ${t.color}40` }}
                   />
-                  <span className="text-xs sm:text-sm lg:text-[15px] xl:text-base font-medium text-text-secondary">{t.name}</span>
+                  <span className="text-xs sm:text-[13px] font-medium text-text-muted">{t.name}</span>
                 </div>
               ))}
             </div>
           </motion.div>
 
           {/* Skills Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {categories.map((cat, ci) => {
               const items = skills.filter((s) => s.category === cat);
               if (!items.length) return null;
               return (
                 <motion.div
                   key={cat}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.08 * ci }}
-                  className="p-5 sm:p-6 rounded-2xl glass-card aura-border"
+                  transition={{ duration: 0.4, delay: 0.06 * ci }}
+                  className="p-5 sm:p-6 rounded-xl glass-card"
                 >
-                  <h3 className="font-heading text-sm sm:text-base lg:text-lg xl:text-[19px] font-semibold text-text-primary mb-4 sm:mb-5 flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary-light shadow-[0_0_6px_rgba(51,255,214,0.6)]" />
+                  <h3 className="font-heading text-xs sm:text-sm font-semibold text-text-primary mb-3.5 flex items-center gap-2 uppercase tracking-wider">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary-light/60" />
                     {cat}
                   </h3>
-                  <div className="space-y-3 sm:space-y-4">
-                    {items.map((skill, si) => (
-                      <div key={skill.name}>
-                        <div className="flex justify-between mb-1.5">
-                          <span className="text-xs sm:text-sm lg:text-[15px] xl:text-base font-medium text-text-secondary">{skill.name}</span>
-                          <span className="text-[11px] sm:text-xs lg:text-[13px] font-mono text-text-muted">{skill.level}%</span>
-                        </div>
-                        <div className="h-2 sm:h-2.5 bg-surface rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={isInView ? { width: `${skill.level}%` } : {}}
-                            transition={{ duration: 0.8, delay: 0.3 + si * 0.06, ease: 'easeOut' }}
-                            className="h-full rounded-full bg-gradient-to-r from-primary via-primary-light to-accent"
-                            style={{ boxShadow: '0 0 8px rgba(0,255,204,0.4)' }}
-                          />
-                        </div>
+                  <div className="flex flex-wrap gap-2">
+                    {items.map((skill) => (
+                      <div key={skill.name} className="px-3 py-1.5 rounded-lg border border-white/[0.05] bg-white/[0.02] text-[11px] sm:text-xs font-medium text-text-muted hover:text-text-secondary hover:border-white/10 transition-colors cursor-default">
+                        {skill.name}
                       </div>
                     ))}
                   </div>
@@ -143,8 +126,6 @@ export default function Skills() {
           </div>
         </SectionStroke>
       </div>
-
-      <div className="section-divider mt-16 sm:mt-20 md:mt-24 lg:mt-28" />
     </section>
   );
 }

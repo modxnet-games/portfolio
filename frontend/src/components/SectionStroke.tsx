@@ -19,12 +19,13 @@ export default function SectionStroke({ children, className = '', delay = 0.1 }:
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className={`section-stroke ${className}`}
     >
+      {/* Animated stroke border */}
+      <span className="stroke-line" />
+      {/* Corner accents */}
       <span className="corner-accent corner-tl" />
       <span className="corner-accent corner-tr" />
       <span className="corner-accent corner-bl" />
       <span className="corner-accent corner-br" />
-      <span className="edge-glow-top" />
-      <span className="edge-glow-bottom" />
       <div className="relative z-10">
         {children}
       </div>
